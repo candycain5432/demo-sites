@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grace Harbor Church | Bayview</title>
+  <meta name="description" content="Grace Harbor Community Church in Bayview. Sundays at 9 and 11am.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="demo-badge">Demo site · forms don't send</div>
+
+  <header class="nav" id="nav">
+    <a href="#" class="logo">Grace Harbor <span>Church</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#visit">New here?</a>
+      <a href="#sermons">Sermons</a>
+      <a href="#events">Events</a>
+      <a href="#connect">Get involved</a>
+      <a href="#prayer">Prayer</a>
+      <a href="#give" class="give-link">Give</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">Menu</button>
+  </header>
+
+  <section class="hero">
+    <img src="img/hero.jpg" alt="Congregation worshipping with hands raised" class="hero-img">
+    <div class="hero-content">
+      <h1>We'd love to meet you.</h1>
+      <p class="hero-sub">Grace Harbor is a church of about 400 people in Bayview. Some of us have followed Jesus for decades and some of us are still figuring out what we believe. There's a seat for you either way.</p>
+      <div class="hero-actions">
+        <a href="#visit" class="btn btn-light">Plan a visit</a>
+        <a href="#sermons" class="btn btn-outline-light">Watch Sunday's message</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-bar">
+    <div><strong>Sundays</strong><p>9:00 and 11:00am</p></div>
+    <div><strong>Where</strong><p>1450 Harbor View Rd, Bayview</p></div>
+    <div><strong>Online</strong><p>Livestream at 11:00am</p></div>
+    <div class="next"><strong>Next service</strong><p id="nextService">Sunday at 9:00am</p></div>
+  </section>
+
+  <section id="visit" class="section">
+    <div class="visit-grid">
+      <div>
+        <h2>Your first Sunday</h2>
+        <p class="lead">Walking into a new church can be awkward. Here are the questions people usually ask us.</p>
+        <dl class="faq">
+          <dt>What should I wear?</dt>
+          <dd>Whatever you want. You'll see jeans, shorts, and the occasional suit.</dd>
+          <dt>How long is the service?</dt>
+          <dd>About 70 minutes. We sing for 20 or so, then Pastor James or one of our other teachers speaks for about 35.</dd>
+          <dt>What about my kids?</dt>
+          <dd>We have classes from nursery through 5th grade during both services. Check in at the kids desk in the lobby and you'll get a sticker to pick them up with.</dd>
+          <dt>Where do I park?</dt>
+          <dd>The main lot off Harbor View. If you tell us you're coming, we'll hold a spot for you up front.</dd>
+        </dl>
+      </div>
+      <img src="img/gathering.jpg" alt="People talking outside under string lights" class="visit-img">
+    </div>
+
+    <div class="visit-form-wrap">
+      <div>
+        <h3>Let us know you're coming</h3>
+        <p>Totally optional. If you fill this out, someone will meet you at the front door, help you find the kids rooms, and save you a seat. That's it. No one is going to show up at your house.</p>
+      </div>
+      <form id="visitForm" class="form">
+        <div class="row">
+          <label>First name<input required name="name"></label>
+          <label>Email<input required type="email" name="email"></label>
+        </div>
+        <div class="row">
+          <label>Which Sunday?<select name="date" id="visitDate"></select></label>
+          <label>Time<select name="time"><option>9:00am</option><option>11:00am</option></select></label>
+        </div>
+        <div class="row">
+          <label>Adults<input type="number" name="adults" min="1" value="1"></label>
+          <label>Kids<input type="number" name="kids" min="0" value="0" id="kidsInput"></label>
+        </div>
+        <label id="kidsAges" class="hidden">Kids' ages<input name="ages" placeholder="e.g. 3 and 7"></label>
+        <button class="btn btn-dark">Send</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="pastor">
+    <img src="img/pastor.jpg" alt="Pastor James Whitfield">
+    <div>
+      <h2>A note from Pastor James</h2>
+      <p>My wife Carla and I moved to Bayview in 2011 to start Grace Harbor in our living room with nine people and a lot of folding chairs. We've grown since then, but the idea hasn't changed much. We want to be a church where it's okay to show up with questions, where people actually know each other's names, and where we take care of our neighbors.</p>
+      <p>If you've been hurt by church before, or you've never really been, I'd love to buy you a coffee after a service and hear your story.</p>
+      <p class="sig">James Whitfield, Lead Pastor</p>
+    </div>
+  </section>
+
+  <section id="sermons" class="section">
+    <div class="sermon-head">
+      <h2>Sermons</h2>
+      <input type="search" id="sermonSearch" placeholder="Search by title, speaker, or passage" aria-label="Search sermons">
+    </div>
+
+    <div class="featured" id="featured"></div>
+
+    <div class="series-filters" id="seriesFilters"></div>
+    <div class="sermon-list" id="sermonList"></div>
+  </section>
+
+  <section id="events" class="section section-tint">
+    <h2>Coming up</h2>
+    <div class="events" id="eventsList"></div>
+  </section>
+
+  <section id="connect" class="section">
+    <h2>Get involved</h2>
+    <p class="lead">Sunday is a good start, but most friendships here happen the rest of the week.</p>
+    <div class="connect-grid">
+      <article class="connect-card">
+        <img src="img/group.jpg" alt="Friends with their arms around each other">
+        <h3>Small groups</h3>
+        <p>About 30 groups meet in homes around town during the week. Most share a meal, talk about Sunday's message, and pray for each other. New groups start in January.</p>
+      </article>
+      <article class="connect-card">
+        <img src="img/pantry.jpg" alt="Volunteers sorting boxes of food">
+        <h3>Food pantry</h3>
+        <p>Every Saturday morning we hand out groceries to around 150 local families. No experience needed. Kids 8 and up can serve with a parent.</p>
+      </article>
+      <article class="connect-card">
+        <img src="img/service.jpg" alt="People seated in a service holding Bibles">
+        <h3>Students &amp; kids</h3>
+        <p>Harbor Kids runs during both Sunday services. Middle and high schoolers meet Wednesday nights at 6:30 for dinner, games, and a short talk.</p>
+      </article>
+    </div>
+    <ul class="more-list">
+      <li><strong>Worship team</strong> Musicians and sound/video volunteers</li>
+      <li><strong>Marriage prep</strong> Six-week class, offered twice a year</li>
+      <li><strong>Care team</strong> Meals and visits for people going through a hard season</li>
+      <li><strong>Recovery</strong> Thursday nights, 7pm, in the Fellowship Hall</li>
+    </ul>
+  </section>
+
+  <section id="prayer" class="section section-tint">
+    <div class="prayer">
+      <div>
+        <h2>Prayer requests</h2>
+        <p class="lead">Our prayer team meets Tuesday mornings and prays through every request by name.</p>
+        <form id="prayerForm" class="form">
+          <label>Name <span class="opt-label">(optional)</span><input name="name"></label>
+          <label>How can we pray for you?<textarea required name="request" rows="5"></textarea></label>
+          <label class="check"><input type="checkbox" name="private" checked> Keep this private to the prayer team</label>
+          <label class="check"><input type="checkbox" name="contact"> I'd like a pastor to call me</label>
+          <button class="btn btn-dark">Send request</button>
+        </form>
+      </div>
+      <div class="prayer-wall">
+        <h3>Prayer wall</h3>
+        <p class="muted">Shared with permission. Tap "I prayed" to let them know you did.</p>
+        <div id="wall"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="give" class="section">
+    <div class="give">
+      <div>
+        <h2>Give</h2>
+        <p>Your giving keeps the lights on, pays our staff, and funds the food pantry and our mission partners. We publish a full budget report every year at our January members meeting.</p>
+        <div class="goal">
+          <p><strong>New kids wing</strong> <span class="muted">· <span id="goalRaised">$360,000</span> of $500,000</span></p>
+          <div class="bar"><div id="goalBar" style="width:72%"></div></div>
+          <p class="muted small-text">The kids rooms are past capacity on Sundays. We're hoping to break ground in the spring.</p>
+        </div>
+        <p class="muted small-text">Prefer to write a check? Mail it to the church office or drop it in the box in the lobby.</p>
+      </div>
+      <form class="give-card" id="giveForm">
+        <div class="freq" role="radiogroup">
+          <button type="button" class="active" data-f="once">One time</button>
+          <button type="button" data-f="monthly">Monthly</button>
+        </div>
+        <div class="amounts" id="amounts">
+          <button type="button" data-a="25">$25</button>
+          <button type="button" data-a="50" class="active">$50</button>
+          <button type="button" data-a="100">$100</button>
+          <button type="button" data-a="250">$250</button>
+        </div>
+        <label>Other amount<input type="number" id="customAmt" min="1" placeholder="$"></label>
+        <label>Fund
+          <select id="fund"><option>General fund</option><option>Kids wing</option><option>Food pantry</option><option>Missions</option></select>
+        </label>
+        <label class="check"><input type="checkbox" id="coverFees"> Add 2.9% to cover card fees</label>
+        <button class="btn btn-dark btn-block" id="giveBtn">Give $50</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <div class="logo">Grace Harbor <span>Church</span></div>
+        <p>1450 Harbor View Rd<br>Bayview, ST 00000<br>(555) 010-7788</p>
+      </div>
+      <div>
+        <h4>Sundays</h4>
+        <p>9:00 and 11:00am<br>Livestream at 11:00am</p>
+      </div>
+      <div>
+        <h4>Office</h4>
+        <p>Monday to Thursday, 9 to 4<br>office@graceharbor.example</p>
+      </div>
+      <div>
+        <h4>Weekly email</h4>
+        <form class="news" id="newsForm"><input type="email" required placeholder="Your email" aria-label="Email"><button class="btn btn-light">Sign up</button></form>
+      </div>
+    </div>
+    <p class="small">© 2026 Grace Harbor Community Church. This is a demo site for a made-up church.</p>
+  </footer>
+
+  <div class="player" id="player" aria-live="polite">
+    <button class="play" id="playBtn" aria-label="Play or pause">❚❚</button>
+    <div class="player-info">
+      <strong id="pTitle">Sermon</strong>
+      <small id="pMeta">Speaker</small>
+      <div class="progress" id="progress"><div id="progressFill"></div></div>
+    </div>
+    <span class="time" id="pTime">0:00</span>
+    <button class="icon-btn" id="closePlayer" aria-label="Close player">✕</button>
+  </div>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true"><div class="modal-card" id="modalCard"></div></div>
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

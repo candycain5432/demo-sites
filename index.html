@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hometown Web Studio | Sample Sites</title>
+  <meta name="description" content="Sample websites for local businesses, churches, and food trucks.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #fafaf8; --ink: #1a1a1a; --muted: #666; --line: #e2e0da; --accent: #1f5f8b; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Libre Franklin', system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; font-size: 17px; }
+    a { color: inherit; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 5vw; }
+    header { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+    .brand { font-weight: 700; text-decoration: none; font-size: 18px; }
+    header a.contact { color: var(--accent); font-weight: 500; }
+    .intro { padding: 56px 0 30px; max-width: 700px; }
+    h1 { font-size: clamp(30px, 4.4vw, 44px); line-height: 1.15; margin-bottom: 16px; font-weight: 700; }
+    .intro p { color: #444; font-size: 18px; }
+    .demo { display: grid; grid-template-columns: 1.25fr 1fr; gap: 40px; align-items: center; padding: 44px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+    .demo img { width: 100%; border: 1px solid var(--line); box-shadow: 0 8px 24px rgba(0,0,0,.08); transition: transform .2s; }
+    .demo:hover img { transform: translateY(-3px); }
+    .type { font-size: 14px; color: var(--muted); }
+    .demo h2 { font-size: 26px; margin: 2px 0 10px; }
+    .demo p { color: #444; margin-bottom: 12px; }
+    .demo ul { padding-left: 18px; color: #444; font-size: 16px; margin-bottom: 16px; }
+    .demo ul li { margin-bottom: 4px; }
+    .go { color: var(--accent); font-weight: 700; }
+    .demo:hover .go { text-decoration: underline; }
+    .note { padding: 50px 0 20px; max-width: 700px; }
+    .note h2 { font-size: 24px; margin-bottom: 10px; }
+    .note p { color: #444; margin-bottom: 12px; }
+    footer { padding: 40px 0 50px; color: var(--muted); font-size: 14px; }
+    @media (max-width: 800px) {
+      .demo { grid-template-columns: 1fr; gap: 20px; padding: 34px 0; }
+      .wrap { padding: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="#">Hometown Web Studio</a>
+      <a class="contact" href="mailto:hello@example.com">hello@example.com</a>
+    </header>
+
+    <section class="intro">
+      <h1>Sample sites</h1>
+      <p>These are three example websites we built to show what's possible for a small business. The businesses are made up, but everything works: you can place an order, book a haircut, or RSVP to an event. Nothing actually gets sent anywhere, so click around as much as you like.</p>
+    </section>
+
+    <a class="demo" href="food-truck/">
+      <img src="previews/food-truck.jpg" alt="Screenshot of the Smoke & Salsa food truck site">
+      <div>
+        <span class="type">Food truck / restaurant</span>
+        <h2>Smoke &amp; Salsa</h2>
+        <p>A taco truck that takes orders online so people can skip the line.</p>
+        <ul>
+          <li>Menu with photos, add-ons, and a cart</li>
+          <li>Checkout with pickup time, plus an order status screen</li>
+          <li>Weekly schedule of where the truck will be</li>
+          <li>Catering price estimate and request form</li>
+        </ul>
+        <span class="go">Open the site</span>
+      </div>
+    </a>
+
+    <a class="demo" href="church/">
+      <img src="previews/church.jpg" alt="Screenshot of the Grace Harbor Church site">
+      <div>
+        <span class="type">Church / nonprofit</span>
+        <h2>Grace Harbor Church</h2>
+        <p>A church site built around making first-time visitors feel comfortable.</p>
+        <ul>
+          <li>"Plan a visit" form and first-Sunday FAQ</li>
+          <li>Sermon archive with search and an audio player</li>
+          <li>Events with RSVPs</li>
+          <li>Prayer requests and online giving</li>
+        </ul>
+        <span class="go">Open the site</span>
+      </div>
+    </a>
+
+    <a class="demo" href="barbershop/">
+      <img src="previews/barbershop.jpg" alt="Screenshot of the Oak & Iron Barber Co. site">
+      <div>
+        <span class="type">Barber / salon / anything by appointment</span>
+        <h2>Oak &amp; Iron Barber Co.</h2>
+        <p>A barbershop where customers book their own appointments, any time of day.</p>
+        <ul>
+          <li>Booking: pick a service, a barber, and an open time</li>
+          <li>Add the appointment to your calendar, or cancel it</li>
+          <li>Barber profiles, price list, and memberships</li>
+          <li>Hours that show whether the shop is open right now</li>
+        </ul>
+        <span class="go">Open the site</span>
+      </div>
+    </a>
+
+    <section class="note">
+      <h2>Want one for your business?</h2>
+      <p>Every site we build starts from your photos, your prices, and the way you actually talk to customers. Most small business sites take two to four weeks from first call to launch.</p>
+      <p>Email <a href="mailto:hello@example.com">hello@example.com</a> or call (555) 000-0000 and tell us a little about what you do.</p>
+    </section>
+
+    <footer>© 2026 Hometown Web Studio. The businesses shown above are fictional.</footer>
+  </div>
+</body>
+</html>

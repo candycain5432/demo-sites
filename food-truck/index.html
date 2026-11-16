@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smoke & Salsa | Brisket Tacos</title>
+  <meta name="description" content="Smoked brisket tacos out of a truck. Order ahead and pick up at the window.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="demo-badge">Demo site · orders aren't real</div>
+
+  <header class="nav">
+    <a href="#" class="logo">Smoke &amp; Salsa</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#menu">Menu</a>
+      <a href="#find-us">Schedule</a>
+      <a href="#catering">Catering</a>
+      <a href="#about">About</a>
+    </nav>
+    <button class="cart-btn" id="cartBtn" aria-label="Open cart">
+      Order <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">Menu</button>
+  </header>
+
+  <section class="hero">
+    <img src="img/hero.jpg" alt="Four tacos on a plate next to a bottle of Jarritos" class="hero-img">
+    <div class="hero-text">
+      <p class="status" id="liveStatus">Today: Riverside Park, 11am to 9pm</p>
+      <h1>Smoked brisket tacos, out of a truck.</h1>
+      <p class="hero-sub">We smoke brisket overnight on post oak and put it on tortillas we press by hand. Order ahead and it'll be bagged and waiting at the window.</p>
+      <a href="#menu" class="btn btn-primary">Start an order</a>
+    </div>
+  </section>
+
+  <section id="menu" class="section">
+    <div class="menu-head">
+      <h2>Menu</h2>
+      <p>Order here and skip the line. We'll text you when it's up.</p>
+    </div>
+    <div class="menu-tabs" id="menuTabs" role="tablist"></div>
+    <div class="menu-grid" id="menuGrid"></div>
+
+    <div class="board">
+      <div>
+        <h3>Sides</h3>
+        <ul class="price-list" id="sidesList"></ul>
+      </div>
+      <div>
+        <h3>Drinks &amp; sweets</h3>
+        <ul class="price-list" id="drinksList"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="find-us" class="section section-dark">
+    <div class="split">
+      <div>
+        <h2>Where we'll be this week</h2>
+        <p class="muted">If the weather gets weird we post changes on Instagram first. Monday we're closed so Marco can clean the smoker and sleep.</p>
+      </div>
+      <table class="schedule" id="schedule"></table>
+    </div>
+  </section>
+
+  <section id="catering" class="section">
+    <div class="catering">
+      <div>
+        <h2>Catering</h2>
+        <p>We do weddings, office lunches, graduation parties, church picnics, that kind of thing. We can bring the whole truck or drop off trays. 25 guests minimum, and most people book us about a month out.</p>
+        <div class="estimate">
+          <label for="guestRange">Ballpark for <strong id="guestOut">75</strong> people</label>
+          <input type="range" id="guestRange" min="25" max="400" step="5" value="75">
+          <p class="estimate-price"><strong id="estOut">$1,163</strong> <span>at $15.50 a head for the taco bar</span></p>
+        </div>
+      </div>
+      <form class="form" id="cateringForm">
+        <h3>Ask about a date</h3>
+        <div class="row">
+          <label>Name<input required name="name"></label>
+          <label>Email<input required type="email" name="email"></label>
+        </div>
+        <div class="row">
+          <label>Date<input required type="date" name="date"></label>
+          <label>What's the event?
+            <select name="type"><option>Wedding</option><option>Work lunch</option><option>Party</option><option>Something else</option></select>
+          </label>
+        </div>
+        <label>Anything else we should know<textarea name="details" rows="3" placeholder="Where it is, how many people, food allergies"></textarea></label>
+        <button class="btn btn-primary">Send</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="about" class="section about">
+    <img src="img/truck.jpg" alt="The food truck parked on a city street" class="about-img">
+    <div>
+      <h2>About us</h2>
+      <p>Marco started Smoke &amp; Salsa in 2019 with a used truck and a smoker his uncle welded for him back in San Antonio. Our first Saturday at the farmers market we sold out in an hour and a half and had to tape a sign to the window.</p>
+      <p>It's still Marco on the pit most mornings, and his sister Ana runs the window. We still press every tortilla by hand, mostly because Marco won't let us stop.</p>
+      <div class="reviews">
+        <blockquote>"Brisket taco is the best thing I've eaten in this town. I drive across the river for it on Thursdays."<cite>Sam R., Google</cite></blockquote>
+        <blockquote>"Ordered on my lunch break, walked up and it was ready. Back at my desk in 15 minutes."<cite>Priya K., Google</cite></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div>
+      <div class="logo">Smoke &amp; Salsa</div>
+      <p>Tue to Sun · (555) 014-2200<br>hello@smokeandsalsa.example</p>
+    </div>
+    <p class="small">© 2026 Smoke &amp; Salsa. This is a demo site for a made-up business.</p>
+  </footer>
+
+  <div class="overlay" id="overlay"></div>
+  <aside class="drawer" id="drawer" aria-label="Your order">
+    <div class="drawer-head">
+      <h3 id="drawerTitle">Your order</h3>
+      <button class="icon-btn" id="closeDrawer" aria-label="Close">✕</button>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+    <div class="drawer-foot" id="drawerFoot"></div>
+  </aside>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true">
+    <div class="modal-card" id="modalCard"></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
