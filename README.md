@@ -13,7 +13,8 @@ Everything is plain static HTML/CSS/JS. There's no build step and no server, so 
 - All orders, bookings, and forms are **simulated**. Nothing is sent anywhere. A small badge on every page says so.
 - Carts, RSVPs and bookings are saved in the visitor's browser (localStorage) so the demos feel real when clicking around.
 - Dates (schedule, events, open hours, booking calendar) are computed from today's date, so the demos never look stale.
-- No photos are used, so there are no licensing concerns. Swap in a client's real photos when customizing.
+- Photos are from [Unsplash](https://unsplash.com/license) (free to use, no attribution required) and are saved in each site's `img/` folder. Swap in the client's own photos when customizing.
+- `previews/` holds the screenshots used on the landing page.
 
 ## Preview locally
 ```bash

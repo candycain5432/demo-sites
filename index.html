@@ -3,141 +3,110 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hometown Web Studio | Demo Sites</title>
-  <meta name="description" content="Websites for local businesses, churches, and food trucks. Click through live demos.">
+  <title>Hometown Web Studio | Sample Sites</title>
+  <meta name="description" content="Sample websites for local businesses, churches, and food trucks.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    :root { --bg: #f7f5f0; --ink: #181818; --muted: #66625b; --line: #e3ded4; --accent: #2f5bea; }
+    :root { --bg: #fafaf8; --ink: #1a1a1a; --muted: #666; --line: #e2e0da; --accent: #1f5f8b; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; }
+    body { font-family: 'Libre Franklin', system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; font-size: 17px; }
     a { color: inherit; }
-    header { max-width: 1160px; margin: 0 auto; padding: 24px 5vw; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-    .brand { font-family: 'DM Serif Display', serif; font-size: 22px; text-decoration: none; }
-    .brand span { color: var(--accent); }
-    .cta { background: var(--ink); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 99px; font-weight: 700; font-size: 14px; white-space: nowrap; }
-    .hero { max-width: 1160px; margin: 0 auto; padding: 60px 5vw 40px; }
-    .hero p.kicker { font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-size: 13px; }
-    h1 { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: clamp(40px, 6vw, 72px); line-height: 1.05; margin: 12px 0 18px; max-width: 900px; }
-    .hero p.sub { font-size: 19px; color: var(--muted); max-width: 640px; }
-    .demos { max-width: 1160px; margin: 0 auto; padding: 30px 5vw 80px; display: grid; gap: 28px; }
-    .demo { display: grid; grid-template-columns: 1.1fr 1fr; background: #fff; border: 1px solid var(--line); border-radius: 22px; overflow: hidden; text-decoration: none; transition: transform .2s, box-shadow .2s; }
-    .demo:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,.08); }
-    .preview { min-height: 300px; position: relative; display: grid; place-items: center; padding: 30px; overflow: hidden; }
-    .preview .mock { width: 100%; max-width: 420px; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,.3); background: #fff; }
-    .mock .bar { height: 24px; background: #eee; display: flex; gap: 6px; align-items: center; padding: 0 10px; }
-    .mock .bar i { width: 8px; height: 8px; border-radius: 50%; background: #ccc; display: block; }
-    .mock .body { padding: 24px 22px; min-height: 170px; }
-    .mock h3 { font-size: 28px; line-height: 1.05; }
-    .mock .pill { display: inline-block; margin-top: 14px; padding: 8px 16px; border-radius: 99px; font-weight: 700; font-size: 13px; }
-    .info { padding: 40px; display: flex; flex-direction: column; gap: 14px; justify-content: center; }
-    .tag { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); }
-    .info h2 { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: 36px; line-height: 1.1; }
-    .info p { color: var(--muted); }
-    .features { list-style: none; display: grid; gap: 6px; font-size: 15px; }
-    .features li::before { content: '✓'; color: var(--accent); font-weight: 700; margin-right: 10px; }
-    .open { font-weight: 700; color: var(--accent); margin-top: 6px; }
-    .why { background: var(--ink); color: #fff; }
-    .why-inner { max-width: 1160px; margin: 0 auto; padding: 80px 5vw; display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
-    .why h3 { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: 24px; margin-bottom: 6px; }
-    .why p { color: #b5b0a7; font-size: 15px; }
-    footer { text-align: center; padding: 40px 5vw; color: var(--muted); font-size: 14px; }
-    @media (max-width: 860px) {
-      .demo { grid-template-columns: 1fr; }
-      .why-inner { grid-template-columns: 1fr 1fr; }
-      .info { padding: 28px; }
-    }
-    @media (max-width: 540px) {
-      header, .hero, .demos { padding-left: 16px; padding-right: 16px; }
-      .why-inner { grid-template-columns: 1fr; padding: 60px 16px; }
-      .preview { min-height: 220px; padding: 20px; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 5vw; }
+    header { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+    .brand { font-weight: 700; text-decoration: none; font-size: 18px; }
+    header a.contact { color: var(--accent); font-weight: 500; }
+    .intro { padding: 56px 0 30px; max-width: 700px; }
+    h1 { font-size: clamp(30px, 4.4vw, 44px); line-height: 1.15; margin-bottom: 16px; font-weight: 700; }
+    .intro p { color: #444; font-size: 18px; }
+    .demo { display: grid; grid-template-columns: 1.25fr 1fr; gap: 40px; align-items: center; padding: 44px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+    .demo img { width: 100%; border: 1px solid var(--line); box-shadow: 0 8px 24px rgba(0,0,0,.08); transition: transform .2s; }
+    .demo:hover img { transform: translateY(-3px); }
+    .type { font-size: 14px; color: var(--muted); }
+    .demo h2 { font-size: 26px; margin: 2px 0 10px; }
+    .demo p { color: #444; margin-bottom: 12px; }
+    .demo ul { padding-left: 18px; color: #444; font-size: 16px; margin-bottom: 16px; }
+    .demo ul li { margin-bottom: 4px; }
+    .go { color: var(--accent); font-weight: 700; }
+    .demo:hover .go { text-decoration: underline; }
+    .note { padding: 50px 0 20px; max-width: 700px; }
+    .note h2 { font-size: 24px; margin-bottom: 10px; }
+    .note p { color: #444; margin-bottom: 12px; }
+    footer { padding: 40px 0 50px; color: var(--muted); font-size: 14px; }
+    @media (max-width: 800px) {
+      .demo { grid-template-columns: 1fr; gap: 20px; padding: 34px 0; }
+      .wrap { padding: 0 16px; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <a class="brand" href="#">Hometown<span>.</span>Web Studio</a>
-    <a class="cta" href="mailto:hello@example.com">Get a Free Quote</a>
-  </header>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="#">Hometown Web Studio</a>
+      <a class="contact" href="mailto:hello@example.com">hello@example.com</a>
+    </header>
 
-  <section class="hero">
-    <p class="kicker">Live demos</p>
-    <h1>Websites that work as hard as you do.</h1>
-    <p class="sub">We build modern, mobile-friendly websites for local businesses, churches, and food trucks. Click into any demo below and try it yourself: place an order, book a haircut, or plan a church visit.</p>
-  </section>
+    <section class="intro">
+      <h1>Sample sites</h1>
+      <p>These are three example websites we built to show what's possible for a small business. The businesses are made up, but everything works: you can place an order, book a haircut, or RSVP to an event. Nothing actually gets sent anywhere, so click around as much as you like.</p>
+    </section>
 
-  <main class="demos">
     <a class="demo" href="food-truck/">
-      <div class="preview" style="background:linear-gradient(135deg,#ff5a1f,#ffc83d)">
-        <div class="mock"><div class="bar"><i></i><i></i><i></i></div>
-          <div class="body" style="background:#fff6ea"><h3 style="font-family:Impact,sans-serif;color:#1d1714">Texas smoke.<br><span style="color:#ff5a1f">Street taco</span> soul. 🌮</h3><span class="pill" style="background:#ff5a1f;color:#fff">Order Ahead →</span></div>
-        </div>
-      </div>
-      <div class="info">
-        <span class="tag">Food Truck · Restaurant</span>
+      <img src="previews/food-truck.jpg" alt="Screenshot of the Smoke & Salsa food truck site">
+      <div>
+        <span class="type">Food truck / restaurant</span>
         <h2>Smoke &amp; Salsa</h2>
-        <p>Turn hungry scrollers into paying customers with online ordering that works right from their phone.</p>
-        <ul class="features">
-          <li>Online ordering with cart &amp; item customization</li>
-          <li>Live order tracker ("your food is ready!")</li>
-          <li>Weekly location schedule that highlights today</li>
-          <li>Catering quote calculator &amp; request form</li>
+        <p>A taco truck that takes orders online so people can skip the line.</p>
+        <ul>
+          <li>Menu with photos, add-ons, and a cart</li>
+          <li>Checkout with pickup time, plus an order status screen</li>
+          <li>Weekly schedule of where the truck will be</li>
+          <li>Catering price estimate and request form</li>
         </ul>
-        <span class="open">Open demo →</span>
+        <span class="go">Open the site</span>
       </div>
     </a>
 
     <a class="demo" href="church/">
-      <div class="preview" style="background:linear-gradient(160deg,#1b2a44,#3e4e6c 60%,#d9a35b)">
-        <div class="mock"><div class="bar"><i></i><i></i><i></i></div>
-          <div class="body" style="background:#faf6ef"><h3 style="font-family:Georgia,serif;color:#1b2a44">Come as you are.<br><em style="color:#c18a40">You belong here.</em></h3><span class="pill" style="background:#d9a35b;color:#1b2a44">Plan Your Visit</span></div>
-        </div>
-      </div>
-      <div class="info">
-        <span class="tag">Church · Nonprofit</span>
+      <img src="previews/church.jpg" alt="Screenshot of the Grace Harbor Church site">
+      <div>
+        <span class="type">Church / nonprofit</span>
         <h2>Grace Harbor Church</h2>
-        <p>Welcome first-time guests, keep your congregation connected all week, and make giving effortless.</p>
-        <ul class="features">
-          <li>"Plan a Visit" form &amp; live service countdown</li>
-          <li>Searchable sermon library with audio player</li>
-          <li>Event calendar with one-click RSVPs</li>
-          <li>Prayer requests, prayer wall &amp; online giving</li>
+        <p>A church site built around making first-time visitors feel comfortable.</p>
+        <ul>
+          <li>"Plan a visit" form and first-Sunday FAQ</li>
+          <li>Sermon archive with search and an audio player</li>
+          <li>Events with RSVPs</li>
+          <li>Prayer requests and online giving</li>
         </ul>
-        <span class="open">Open demo →</span>
+        <span class="go">Open the site</span>
       </div>
     </a>
 
     <a class="demo" href="barbershop/">
-      <div class="preview" style="background:radial-gradient(circle at 70% 30%,#3a2e24,#141414 70%)">
-        <div class="mock"><div class="bar"><i></i><i></i><i></i></div>
-          <div class="body" style="background:#141414;color:#fff"><h3 style="font-family:Georgia,serif">Sharp cuts.<br><em style="color:#c69a5a">Good company.</em></h3><span class="pill" style="background:#c69a5a;color:#141414;border-radius:4px">Book an Appointment</span></div>
-        </div>
-      </div>
-      <div class="info">
-        <span class="tag">Salon · Barber · Any Appointment Business</span>
+      <img src="previews/barbershop.jpg" alt="Screenshot of the Oak & Iron Barber Co. site">
+      <div>
+        <span class="type">Barber / salon / anything by appointment</span>
         <h2>Oak &amp; Iron Barber Co.</h2>
-        <p>Let customers book 24/7 without a single phone call. Fewer no-shows, more full chairs.</p>
-        <ul class="features">
-          <li>4-step booking: service → staff → time → confirm</li>
-          <li>Real-time availability by staff member</li>
-          <li>Add-to-calendar, manage &amp; cancel appointments</li>
-          <li>Membership plans, team bios, live "open now" hours</li>
+        <p>A barbershop where customers book their own appointments, any time of day.</p>
+        <ul>
+          <li>Booking: pick a service, a barber, and an open time</li>
+          <li>Add the appointment to your calendar, or cancel it</li>
+          <li>Barber profiles, price list, and memberships</li>
+          <li>Hours that show whether the shop is open right now</li>
         </ul>
-        <span class="open">Open demo →</span>
+        <span class="go">Open the site</span>
       </div>
     </a>
-  </main>
 
-  <section class="why">
-    <div class="why-inner">
-      <div><h3>📱 Mobile-first</h3><p>Over 70% of local searches happen on a phone. Every site looks great on any screen.</p></div>
-      <div><h3>⚡ Fast &amp; secure</h3><p>Lightweight pages that load in a blink and rank well on Google.</p></div>
-      <div><h3>🛠️ Built for you</h3><p>Your colors, your photos, your voice. Every demo is fully customizable.</p></div>
-      <div><h3>🤝 Local support</h3><p>Need a change? Call or text us. No tickets, no runaround.</p></div>
-    </div>
-  </section>
+    <section class="note">
+      <h2>Want one for your business?</h2>
+      <p>Every site we build starts from your photos, your prices, and the way you actually talk to customers. Most small business sites take two to four weeks from first call to launch.</p>
+      <p>Email <a href="mailto:hello@example.com">hello@example.com</a> or call (555) 000-0000 and tell us a little about what you do.</p>
+    </section>
 
-  <footer>© 2026 Hometown Web Studio · All businesses shown are fictional demos.</footer>
+    <footer>© 2026 Hometown Web Studio. The businesses shown above are fictional.</footer>
+  </div>
 </body>
 </html>

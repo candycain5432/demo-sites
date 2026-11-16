@@ -7,20 +7,20 @@ const store = {
 
 // ===== Data =====
 const SERVICES = [
-  { id: 'cut', name: 'Signature Haircut', price: 38, dur: 45, desc: 'Consultation, precision cut, hot towel, wash & style.', main: true, badge: 'Most booked' },
-  { id: 'fade', name: 'Skin Fade', price: 42, dur: 45, desc: 'Bald to blended. Finished with a straight-razor line-up.', main: true },
-  { id: 'shave', name: 'Hot Towel Shave', price: 45, dur: 45, desc: 'Traditional straight-razor shave with hot towels and essential oils.', main: true },
-  { id: 'combo', name: 'The Full Service', price: 75, dur: 75, desc: 'Signature haircut + hot towel shave. The works.', main: true, badge: 'Best value' },
-  { id: 'kids', name: 'Kids Cut (12 & under)', price: 26, dur: 30, desc: 'Patient barbers, a lollipop, and a sharp little look.', main: true },
-  { id: 'beard', name: 'Beard Sculpt', price: 24, dur: 20, desc: 'Shape, line-up, hot towel, and beard oil.', main: false },
-  { id: 'brows', name: 'Brow Clean-up', price: 10, dur: 10, desc: 'Quick tidy with razor and scissors.', main: false },
-  { id: 'scalp', name: 'Scalp Treatment', price: 18, dur: 15, desc: 'Exfoliating scrub and peppermint massage.', main: false },
+  { id: 'cut', name: 'Haircut', price: 38, dur: 45, desc: 'Scissor or clipper cut, hot towel, shampoo, and style.', main: true },
+  { id: 'fade', name: 'Skin fade', price: 42, dur: 45, desc: 'Finished with a straight-razor line-up.', main: true },
+  { id: 'shave', name: 'Hot towel shave', price: 45, dur: 45, desc: 'Straight razor, hot towels, the whole thing.', main: true },
+  { id: 'combo', name: 'Haircut + shave', price: 75, dur: 75, desc: 'Both of the above. Saves you $8.', main: true },
+  { id: 'kids', name: 'Kids cut (12 and under)', price: 26, dur: 30, desc: 'Lollipop included.', main: true },
+  { id: 'beard', name: 'Beard trim', price: 24, dur: 20, desc: 'Shape-up, line-up, hot towel, oil.', main: false },
+  { id: 'brows', name: 'Eyebrows', price: 10, dur: 10, desc: 'Quick clean-up.', main: false },
+  { id: 'scalp', name: 'Scalp scrub', price: 18, dur: 15, desc: 'Peppermint scrub and a few minutes of massage.', main: false },
 ];
 const BARBERS = [
-  { id: 'marcus', name: 'Marcus', role: 'Owner · Master Barber', color: '#8a5a2b', rating: 5.0, reviews: 312, bio: '15 years behind the chair. Specializes in classic cuts and straight-razor shaves.', days: [2, 3, 4, 5, 6] },
-  { id: 'tony', name: 'Tony', role: 'Senior Barber', color: '#2b4a6b', rating: 4.9, reviews: 241, bio: 'Fade king. Great with kids. Will talk your ear off about the Bears.', days: [2, 3, 4, 5, 6, 0] },
-  { id: 'jay', name: 'Jay', role: 'Barber · Beard Specialist', color: '#4a6b2b', rating: 4.9, reviews: 188, bio: 'If your beard needs help, Jay is your guy. Texture and curly hair expert.', days: [3, 4, 5, 6, 0] },
-  { id: 'sofia', name: 'Sofia', role: 'Barber · Stylist', color: '#6b2b4a', rating: 5.0, reviews: 156, bio: 'Scissor work, longer styles, and modern textured crops.', days: [2, 4, 5, 6, 0] },
+  { id: 'marcus', name: 'Marcus', role: 'Owner', img: 'marcus.jpg', bio: 'Opened the shop in 2014. Classic cuts, shaves, and the occasional lecture about conditioner.', days: [2, 3, 4, 5, 6] },
+  { id: 'tony', name: 'Tony', role: 'Barber since 2016', img: 'tony.jpg', bio: 'Fades and kids cuts. Will talk your ear off about the Bears if you let him.', days: [2, 3, 4, 5, 6, 0] },
+  { id: 'jay', name: 'Jay', role: 'Barber since 2020', img: 'jay.jpg', bio: 'Beards, curly hair, and textured cuts. Usually has the first opening of the day.', days: [3, 4, 5, 6, 0] },
+  { id: 'ray', name: 'Ray', role: 'Barber since 1989', img: 'ray.jpg', bio: 'Semi-retired, works three days a week. Best straight-razor shave in the county.', days: [2, 4, 6] },
 ];
 // day index -> [open, close] in minutes, null = closed
 const HOURS = { 0: [600, 900], 1: null, 2: [540, 1140], 3: [540, 1140], 4: [540, 1200], 5: [540, 1200], 6: [480, 960] };
@@ -53,11 +53,11 @@ function slotsFor(day, barberId, duration) {
 // ===== Services list =====
 $('#servicesList').innerHTML = SERVICES.map((s) => `
   <div class="svc">
-    <h3>${s.name}${s.badge ? `<span class="badge">${s.badge}</span>` : ''}</h3>
+    <h3>${s.name}</h3>
     <span class="price">$${s.price}</span>
     <p>${s.desc}</p>
     <span class="dur">${s.dur} min</span>
-    <button class="svc-book" data-svc="${s.id}">${s.main ? 'Book this →' : 'Add to a booking →'}</button>
+    <button class="svc-book" data-svc="${s.id}">${s.main ? 'Book this' : 'Add to booking'}</button>
   </div>`).join('');
 $('#servicesList').addEventListener('click', (e) => {
   const b = e.target.closest('[data-svc]'); if (!b) return;
@@ -69,14 +69,11 @@ $('#servicesList').addEventListener('click', (e) => {
 // ===== Team =====
 $('#teamList').innerHTML = BARBERS.map((b) => `
   <div class="member">
-    <div class="member-top">
-      <div class="avatar" style="background:${b.color}">${b.name[0]}</div>
-      <h3>${b.name}</h3>
-      <div class="role">${b.role}</div>
-      <div class="stars">★★★★★ ${b.rating.toFixed(1)} (${b.reviews})</div>
-      <p>${b.bio}</p>
-    </div>
-    <button data-barber="${b.id}">Book with ${b.name} →</button>
+    <img src="img/${b.img}" alt="${b.name}" loading="lazy">
+    <h3>${b.name}</h3>
+    <div class="role">${b.role}</div>
+    <p>${b.bio}</p>
+    <button data-barber="${b.id}">Book with ${b.name}</button>
   </div>`).join('');
 $('#teamList').addEventListener('click', (e) => {
   const b = e.target.closest('[data-barber]'); if (!b) return;
@@ -111,23 +108,22 @@ function stepService(el) {
       <span><strong>${s.name}</strong><small>${s.desc}</small></span>
       <span class="pp">$${s.price}<small>${s.dur} min</small></span></button>`;
   };
-  el.innerHTML = `<h3>Choose a service</h3><p class="muted">Select one main service, then add any extras.</p>
+  el.innerHTML = `<h3>What are you getting?</h3><p class="sub">Pick one, then add extras if you want.</p>
     <div class="pick-list">${SERVICES.filter((s) => s.main).map((s) => pick(s, false)).join('')}</div>
-    <p class="sub-label">Add-ons</p>
+    <p class="sub-label">Extras</p>
     <div class="pick-list">${SERVICES.filter((s) => !s.main).map((s) => pick(s, true)).join('')}</div>
-    <div class="booking-nav"><span></span><button class="btn btn-brass" data-next ${state.main ? '' : 'disabled'}>Continue →</button></div>`;
+    <div class="booking-nav"><span></span><button class="btn btn-brass" data-next ${state.main ? '' : 'disabled'}>Next</button></div>`;
 }
 
 function stepBarber(el) {
-  const opts = [{ id: 'any', name: 'Any', role: 'First available', color: '#444' }, ...BARBERS];
-  el.innerHTML = `<h3>Choose your barber</h3><p class="muted">Have a favorite? Pick them. Otherwise we'll match you with whoever's free first.</p>
-    <div class="barber-picks">${opts.map((b) => `
+  el.innerHTML = `<h3>Who do you want?</h3><p class="sub">Or pick "No preference" and we'll put you in the first open chair.</p>
+    <div class="barber-picks">
+      <button class="bpick ${state.barber === 'any' ? 'selected' : ''}" data-pick-barber="any"><div class="any">Whoever's free</div><strong>No preference</strong><small>Most openings</small></button>
+      ${BARBERS.map((b) => `
       <button class="bpick ${state.barber === b.id ? 'selected' : ''}" data-pick-barber="${b.id}">
-        <div class="avatar" style="background:${b.color}">${b.id === 'any' ? '✦' : b.name[0]}</div>
-        <strong>${b.id === 'any' ? 'No preference' : b.name}</strong><small>${b.role}</small>
-        ${b.rating ? `<div class="stars">★ ${b.rating.toFixed(1)} · ${b.reviews} reviews</div>` : '<div class="stars">Fastest booking</div>'}
+        <img src="img/${b.img}" alt=""><strong>${b.name}</strong><small>${b.role}</small>
       </button>`).join('')}</div>
-    <div class="booking-nav"><button class="back" data-back>← Back</button><button class="btn btn-brass" data-next ${state.barber ? '' : 'disabled'}>Continue →</button></div>`;
+    <div class="booking-nav"><button class="back" data-back>Back</button><button class="btn btn-brass" data-next ${state.barber ? '' : 'disabled'}>Next</button></div>`;
 }
 
 function stepTime(el) {
@@ -144,32 +140,32 @@ function stepTime(el) {
       const g = slots.filter((s) => fn(s.m)); if (!g.length) return '';
       return `<p class="slot-group">${label}</p><div class="slots">${g.map((s) => `<button class="slot ${state.time === s.m ? 'selected' : ''}" data-time="${s.m}" ${s.free.length ? '' : 'disabled'}>${fmtTime(s.m)}</button>`).join('')}</div>`;
     }).join('')
-    : `<p class="no-slots">${barberName(state.barber)} is fully booked this day. Try another date${state.barber !== 'any' ? ' or choose "No preference"' : ''}.</p>`;
-  el.innerHTML = `<h3>Pick a date &amp; time</h3><p class="muted">Showing openings for ${totalDur()} min with <strong style="color:#fff">${barberName(state.barber)}</strong>.</p>
+    : `<p class="no-slots">Nothing open that day. Try another day${state.barber !== 'any' ? ' or go back and pick "No preference"' : ''}.</p>`;
+  el.innerHTML = `<h3>Pick a time</h3><p class="sub">${totalDur()} minutes with ${state.barber === 'any' ? 'whoever is free' : barberName(state.barber)}. Grayed-out times are taken.</p>
     <div class="dates">${days.map((day) => {
       const ok = HOURS[day.getDay()] && avail(day);
       return `<button class="date ${state.date === dateKey(day) ? 'selected' : ''}" data-date="${dateKey(day)}" ${ok ? '' : 'disabled'} title="${ok ? '' : 'Unavailable'}">
         <span>${day.toLocaleDateString([], { weekday: 'short' })}</span><b>${day.getDate()}</b><span>${day.toLocaleDateString([], { month: 'short' })}</span></button>`;
     }).join('')}</div>
     ${slotHtml}
-    <div class="booking-nav"><button class="back" data-back>← Back</button><button class="btn btn-brass" data-next ${state.time != null ? '' : 'disabled'}>Continue →</button></div>`;
+    <div class="booking-nav"><button class="back" data-back>Back</button><button class="btn btn-brass" data-next ${state.time != null ? '' : 'disabled'}>Next</button></div>`;
 }
 
 function stepDetails(el) {
-  el.innerHTML = `<h3>Almost done</h3><p class="muted">Just a few details so we can hold your chair.</p>
+  el.innerHTML = `<h3>Your info</h3><p class="sub">So we can text you a confirmation.</p>
     <form class="form" id="detailsForm">
       <div class="row">
-        <label>First name<input required name="first" autocomplete="given-name" placeholder="John"></label>
-        <label>Last name<input required name="last" autocomplete="family-name" placeholder="Smith"></label>
+        <label>First name<input required name="first" autocomplete="given-name"></label>
+        <label>Last name<input required name="last" autocomplete="family-name"></label>
       </div>
       <div class="row">
-        <label>Mobile<input required type="tel" name="phone" autocomplete="tel" placeholder="(555) 123-4567"></label>
-        <label>Email<input required type="email" name="email" autocomplete="email" placeholder="john@email.com"></label>
+        <label>Mobile<input required type="tel" name="phone" autocomplete="tel"></label>
+        <label>Email<input required type="email" name="email" autocomplete="email"></label>
       </div>
-      <label>Anything we should know? <span class="muted" style="font-weight:400">(optional)</span><textarea name="notes" rows="2" placeholder="Bringing a photo, sensitive skin, first visit…"></textarea></label>
-      <label class="check"><input type="checkbox" name="sms" checked> Text me a reminder 24 hours before</label>
-      <label class="check"><input type="checkbox" name="first_visit"> This is my first visit to Oak &amp; Iron</label>
-      <div class="booking-nav"><button type="button" class="back" data-back>← Back</button><button class="btn btn-brass" id="confirmBtn">Confirm Booking</button></div>
+      <label>Notes for your barber (optional)<textarea name="notes" rows="2" placeholder="e.g. growing it out, bringing a photo"></textarea></label>
+      <label class="check"><input type="checkbox" name="sms" checked> Text me a reminder the day before</label>
+      <label class="check"><input type="checkbox" name="first_visit"> First time here</label>
+      <div class="booking-nav"><button type="button" class="back" data-back>Back</button><button class="btn btn-brass" id="confirmBtn">Book it</button></div>
     </form>`;
   $('#detailsForm').onsubmit = (e) => {
     e.preventDefault();
@@ -194,18 +190,17 @@ function stepDetails(el) {
 function stepDone(el) {
   const b = state.booking; const day = parseKey(b.date);
   el.innerHTML = `<div class="confirm">
-    <div class="tick">✓</div>
-    <h3>You're booked, ${esc(b.name)}!</h3>
-    <p class="muted">Confirmation <strong style="color:#fff">${b.code}</strong> was sent by text and email.</p>
+    <h3>See you ${day.toLocaleDateString([], { weekday: 'long' })}, ${esc(b.name)}.</h3>
+    <p>We texted a confirmation to your phone. Your confirmation number is ${b.code}.</p>
     <div class="ticket">
-      <div class="sum-row"><span>When</span><span>${day.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' })} · ${fmtTime(b.time)}</span></div>
+      <div class="sum-row"><span>When</span><span>${day.toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' })}, ${fmtTime(b.time)}</span></div>
       <div class="sum-row"><span>Barber</span><span>${barberName(b.barber)}</span></div>
       <div class="sum-row"><span>Service</span><span>${b.services.join(' + ')}</span></div>
-      <div class="sum-row"><span>Total</span><span>$${b.price} · pay in shop</span></div>
+      <div class="sum-row"><span>Total</span><span>$${b.price}, pay at the shop</span></div>
     </div>
-    ${b.firstVisit ? '<p class="muted" style="margin-bottom:18px">🎁 First visit? Your first drink is on us.</p>' : ''}
+    ${b.firstVisit ? '<p style="margin-bottom:18px">First time? Your first drink is on us.</p>' : ''}
     <div class="confirm-actions">
-      <button class="btn btn-brass btn-sm" data-ics>📅 Add to Calendar</button>
+      <button class="btn btn-brass btn-sm" data-ics>Add to calendar</button>
       <button class="btn btn-line btn-sm" data-restart>Book another</button>
     </div></div>`;
 }
@@ -214,12 +209,12 @@ function renderSummary() {
   const s = chosen();
   const day = state.date ? parseKey(state.date) : null;
   $('#summary').innerHTML = `<h4>Your appointment</h4>
-    ${s.length ? s.map((x) => `<div class="sum-row"><span>${x.name}</span><span>$${x.price}</span></div>`).join('') : '<p class="sum-empty">No service selected yet</p>'}
+    ${s.length ? s.map((x) => `<div class="sum-row"><span>${x.name}</span><span>$${x.price}</span></div>`).join('') : '<p class="sum-empty">Nothing picked yet</p>'}
     ${state.barber ? `<div class="sum-row"><span>Barber</span><span>${barberName(state.barber)}</span></div>` : ''}
     ${day && state.step >= 3 ? `<div class="sum-row"><span>Date</span><span>${day.toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' })}</span></div>` : ''}
     ${state.time != null ? `<div class="sum-row"><span>Time</span><span>${fmtTime(state.time)}</span></div>` : ''}
     ${s.length ? `<div class="sum-row"><span>Duration</span><span>${totalDur()} min</span></div><div class="sum-total"><span>Total</span><span>$${totalPrice()}</span></div>` : ''}
-    <p class="sum-note">No payment needed to book. Free cancellation up to 2 hours before your appointment.</p>`;
+    <p class="sum-note">You pay at the shop. Cancel up to 2 hours ahead, no charge.</p>`;
 }
 
 $('#book').addEventListener('click', (e) => {
@@ -266,7 +261,7 @@ function updateApptLink() {
   if (b && !valid) store.set('oi_booking', null);
   $('#myApptLink').classList.toggle('hidden', !valid);
   if (valid) {
-    $('#nextAvail').innerHTML = `<span class="pulse"></span><span>Your next cut: <strong>${parseKey(b.date).toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' })} at ${fmtTime(b.time)}</strong></span>`;
+    $('#nextAvail').innerHTML = `Your appointment: <strong>${parseKey(b.date).toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' })} at ${fmtTime(b.time)}</strong>`;
   } else showNextAvailable();
 }
 $('#myApptLink').onclick = (e) => {
@@ -280,7 +275,7 @@ $('#myApptLink').onclick = (e) => {
       <div class="sum-row"><span>Barber</span><span>${barberName(b.barber)}</span></div>
       <div class="sum-row"><span>Service</span><span>${b.services.join(' + ')}</span></div>
     </div>
-    <div class="modal-actions"><button class="btn btn-line btn-sm" data-cancel-appt>Cancel appointment</button><button class="btn btn-brass btn-sm" data-close>Keep it</button></div>`);
+    <div class="modal-actions"><button class="btn btn-line btn-sm" data-cancel-appt>Cancel it</button><button class="btn btn-brass btn-sm" data-close>Keep it</button></div>`);
 };
 
 function showNextAvailable() {
@@ -289,8 +284,8 @@ function showNextAvailable() {
     for (const b of BARBERS) {
       const slot = slotsFor(d, b.id, 45).find((s) => s.free.length);
       if (slot) {
-        const label = i === 0 ? 'Today' : i === 1 ? 'Tomorrow' : DAY_NAMES[d.getDay()];
-        $('#nextAvailText').textContent = `${label} at ${fmtTime(slot.m)} with ${b.name}`;
+        const label = i === 0 ? 'today' : i === 1 ? 'tomorrow' : DAY_NAMES[d.getDay()];
+        $('#nextAvailText').textContent = `${label} at ${fmtTime(slot.m)}`;
         return;
       }
     }
@@ -305,17 +300,17 @@ function showNextAvailable() {
   $('#hoursTable').innerHTML = order.map((d) => `<tr class="${d === today ? 'today' : ''}"><td>${DAY_NAMES[d]}</td><td>${HOURS[d] ? `${fmtTime(HOURS[d][0])} – ${fmtTime(HOURS[d][1])}` : 'Closed'}</td></tr>`).join('');
   const mins = now.getHours() * 60 + now.getMinutes(); const h = HOURS[today];
   const el = $('#openStatus');
-  if (h && mins >= h[0] && mins < h[1]) { el.className = 'open-status open'; el.textContent = `● Open now · closes at ${fmtTime(h[1])}`; }
-  else { el.className = 'open-status closed'; el.textContent = '● Closed now · book online anytime'; }
+  if (h && mins >= h[0] && mins < h[1]) { el.className = 'open-status open'; el.textContent = `Open now, until ${fmtTime(h[1])}`; }
+  else { el.className = 'open-status closed'; el.textContent = 'Closed right now. You can still book online.'; }
 })();
 
 // ===== Membership =====
 document.querySelector('.plans').addEventListener('click', (e) => {
   const b = e.target.closest('[data-join]'); if (!b) return;
-  openModal(`<h3>Join ${b.dataset.join}</h3><p class="muted">Billed monthly. Cancel anytime. Your membership starts with your next visit.</p>
-    <form class="form" id="joinForm"><label>Full name<input required placeholder="John Smith"></label><label>Email<input type="email" required placeholder="john@email.com"></label>
+  openModal(`<h3>${b.dataset.join} membership</h3><p>Billed monthly. Cancel whenever. It starts with your next visit.</p>
+    <form class="form" id="joinForm"><label>Name<input required></label><label>Email<input type="email" required></label>
     <div class="modal-actions"><button type="button" class="btn btn-line btn-sm" data-close>Not now</button><button class="btn btn-brass btn-sm">Continue to payment</button></div></form>`);
-  $('#joinForm').onsubmit = (ev) => { ev.preventDefault(); closeModal(); toast(`Welcome to the Club! 🥃 (Demo: a live site would connect to Stripe or Square.)`); };
+  $('#joinForm').onsubmit = (ev) => { ev.preventDefault(); closeModal(); toast('Demo only. A live site would go to Square or Stripe here.'); };
 });
 
 // ===== Modal / toast / nav =====
@@ -323,7 +318,7 @@ function openModal(html) { $('#modalCard').innerHTML = html; $('#modal').classLi
 function closeModal() { $('#modal').classList.remove('show'); }
 $('#modal').addEventListener('click', (e) => {
   if (e.target.id === 'modal' || e.target.closest('[data-close]')) closeModal();
-  if (e.target.closest('[data-cancel-appt]')) { store.set('oi_booking', null); updateApptLink(); closeModal(); toast('Appointment cancelled. Hope to see you soon!'); }
+  if (e.target.closest('[data-cancel-appt]')) { store.set('oi_booking', null); updateApptLink(); closeModal(); toast('Cancelled. Hope to see you soon.'); }
 });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 let tt;

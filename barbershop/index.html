@@ -3,75 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Oak & Iron Barber Co. | Book Online</title>
-  <meta name="description" content="Oak & Iron Barber Co. — classic cuts, hot towel shaves, and beard work. Book online in 30 seconds.">
+  <title>Oak & Iron Barber Co. | Millbrook</title>
+  <meta name="description" content="Haircuts, shaves and beard work on Main Street in Millbrook. Book online.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <div class="demo-badge">Demo site · bookings are not real</div>
+  <div class="demo-badge">Demo site · bookings aren't real</div>
 
   <header class="nav">
-    <a href="#" class="logo"><span class="mark">O&amp;I</span><span>Oak &amp; Iron <small>Barber Co.</small></span></a>
+    <a href="#" class="logo">Oak &amp; Iron <small>Barber Co.</small></a>
     <nav class="nav-links" id="navLinks">
-      <a href="#services">Services</a>
+      <a href="#services">Prices</a>
       <a href="#team">Barbers</a>
-      <a href="#club">Membership</a>
-      <a href="#visit">Visit</a>
-      <a href="#" id="myApptLink" class="hidden">My Appointment</a>
+      <a href="#club">Memberships</a>
+      <a href="#visit">Hours &amp; location</a>
+      <a href="#" id="myApptLink" class="hidden">My appointment</a>
     </nav>
-    <a href="#book" class="btn btn-brass btn-sm">Book Now</a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+    <a href="#book" class="btn btn-brass btn-sm">Book</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">Menu</button>
   </header>
 
   <section class="hero">
+    <img src="img/hero.jpg" alt="Inside the barbershop: three chairs, brick walls and mirrors" class="hero-img">
     <div class="hero-inner">
-      <p class="eyebrow">Est. 2014 · Downtown Millbrook</p>
-      <h1>Sharp cuts.<br><em>Good company.</em></h1>
-      <p class="hero-sub">Classic barbering with a modern edge. Hot towel shaves, precision fades, and a cold drink while you wait. Book online in 30 seconds.</p>
+      <h1>Haircuts, shaves, and beard work on Main Street since 2014.</h1>
+      <p class="hero-sub">Four barbers, five chairs, and a fridge full of cold drinks. Book online, or walk in if there's a chair open.</p>
       <div class="hero-actions">
-        <a href="#book" class="btn btn-brass">Book an Appointment</a>
-        <a href="#services" class="btn btn-line">View Services</a>
+        <a href="#book" class="btn btn-brass">Book an appointment</a>
+        <span class="next-avail" id="nextAvail">Next opening: <strong id="nextAvailText">today</strong></span>
       </div>
-      <div class="next-avail" id="nextAvail">
-        <span class="pulse"></span>
-        <span>Next available: <strong id="nextAvailText">Today</strong></span>
-      </div>
-    </div>
-    <div class="hero-pole" aria-hidden="true"><div class="pole"><div class="stripes"></div></div></div>
-    <div class="hero-badges">
-      <div><strong>4.9</strong><span>★★★★★ · 860 Google reviews</span></div>
-      <div><strong>12k+</strong><span>cuts last year</span></div>
-      <div><strong>5</strong><span>master barbers</span></div>
     </div>
   </section>
 
   <section id="services" class="section">
-    <div class="section-head">
-      <p class="eyebrow">Services &amp; Pricing</p>
-      <h2>The menu</h2>
+    <div class="services-wrap">
+      <div>
+        <h2>Prices</h2>
+        <div class="services" id="servicesList"></div>
+        <p class="small-print">Cash, card, and Apple Pay. Tips appreciated, never expected. Seniors and military get $5 off any cut.</p>
+      </div>
+      <div class="photo-stack">
+        <img src="img/lineup.jpg" alt="Barber doing a straight razor line-up">
+        <img src="img/shave.jpg" alt="Customer getting a hot towel shave">
+      </div>
     </div>
-    <div class="services" id="servicesList"></div>
   </section>
 
   <section id="book" class="section section-dark">
-    <div class="section-head">
-      <p class="eyebrow">Online Booking</p>
-      <h2>Book your chair</h2>
-      <p class="muted">Pick a service, choose your barber, and grab a time. Instant confirmation, free cancellation up to 2 hours before.</p>
+    <div class="book-head">
+      <h2>Book a chair</h2>
+      <p>Pick a service, a barber, and a time. You'll get a text to confirm. If something comes up, you can cancel up to 2 hours before.</p>
     </div>
 
     <div class="booking">
       <ol class="steps" id="steps">
         <li data-step="1" class="active"><span>1</span>Service</li>
         <li data-step="2"><span>2</span>Barber</li>
-        <li data-step="3"><span>3</span>Date &amp; Time</li>
-        <li data-step="4"><span>4</span>Details</li>
+        <li data-step="3"><span>3</span>Time</li>
+        <li data-step="4"><span>4</span>Your info</li>
       </ol>
-
       <div class="booking-body">
         <div class="booking-main" id="bookingMain"></div>
         <aside class="summary" id="summary"></aside>
@@ -80,80 +74,69 @@
   </section>
 
   <section id="team" class="section">
-    <div class="section-head">
-      <p class="eyebrow">The Crew</p>
-      <h2>Meet your barbers</h2>
-    </div>
+    <h2>The barbers</h2>
     <div class="team" id="teamList"></div>
   </section>
 
-  <section id="club" class="section section-cream">
-    <div class="section-head">
-      <p class="eyebrow">The Oak &amp; Iron Club</p>
-      <h2>Always look your best</h2>
-      <p class="muted">Monthly memberships for regulars. Priority booking, member pricing, and never pay for a beard trim again.</p>
+  <div class="strip" aria-hidden="true">
+    <img src="img/clippers.jpg" alt="">
+    <img src="img/cut.jpg" alt="">
+    <img src="img/tools.jpg" alt="">
+    <img src="img/style.jpg" alt="">
+  </div>
+
+  <section id="club" class="section">
+    <div class="club-head">
+      <h2>Memberships</h2>
+      <p>If you're in here every few weeks anyway, this saves you money. Billed monthly, cancel whenever.</p>
     </div>
     <div class="plans">
       <div class="plan">
-        <h3>The Regular</h3>
-        <p class="plan-price"><strong>$45</strong>/mo</p>
-        <ul><li>1 haircut per month</li><li>10% off products</li><li>Priority online booking</li></ul>
-        <button class="btn btn-line-dark btn-block" data-join="The Regular">Join the Club</button>
+        <h3>Regular</h3>
+        <p class="plan-price"><strong>$45</strong> a month</p>
+        <ul><li>1 haircut a month</li><li>10% off products</li><li>Book up to 4 weeks out</li></ul>
+        <button class="btn btn-outline" data-join="Regular">Sign up</button>
       </div>
       <div class="plan featured">
-        <span class="ribbon">Most Popular</span>
-        <h3>The Sharp</h3>
-        <p class="plan-price"><strong>$79</strong>/mo</p>
-        <ul><li>2 haircuts per month</li><li>Unlimited beard line-ups</li><li>15% off products</li><li>Free drink every visit 🥃</li></ul>
-        <button class="btn btn-brass btn-block" data-join="The Sharp">Join the Club</button>
+        <h3>Sharp <span class="tag">Most members pick this</span></h3>
+        <p class="plan-price"><strong>$79</strong> a month</p>
+        <ul><li>2 haircuts a month</li><li>Beard line-ups whenever you want</li><li>15% off products</li></ul>
+        <button class="btn btn-brass" data-join="Sharp">Sign up</button>
       </div>
       <div class="plan">
-        <h3>The Executive</h3>
-        <p class="plan-price"><strong>$129</strong>/mo</p>
-        <ul><li>Unlimited haircuts</li><li>1 hot towel shave / month</li><li>20% off products</li><li>Book any barber, any time</li></ul>
-        <button class="btn btn-line-dark btn-block" data-join="The Executive">Join the Club</button>
+        <h3>Unlimited</h3>
+        <p class="plan-price"><strong>$129</strong> a month</p>
+        <ul><li>As many cuts as you want</li><li>1 hot towel shave a month</li><li>20% off products</li></ul>
+        <button class="btn btn-outline" data-join="Unlimited">Sign up</button>
       </div>
     </div>
   </section>
 
   <section class="section reviews-sec">
-    <div class="section-head">
-      <p class="eyebrow">Reviews</p>
-      <h2>Don't take our word for it</h2>
-    </div>
+    <h2>What people say</h2>
     <div class="reviews">
-      <figure><p>"Best fade I've had in this city, and I've tried them all. Booking online takes 20 seconds."</p><figcaption>★★★★★ <span>Andre M.</span></figcaption></figure>
-      <figure><p>"Took my son for his first real haircut. Tony was patient and made it fun. We're lifers now."</p><figcaption>★★★★★ <span>Jessica L.</span></figcaption></figure>
-      <figure><p>"The hot towel shave is an experience. Walked out feeling like a new man before my wedding."</p><figcaption>★★★★★ <span>Chris D.</span></figcaption></figure>
+      <figure><p>"Best fade I've had since I moved here, and I tried just about every shop in town first."</p><figcaption>Andre M. · Google review</figcaption></figure>
+      <figure><p>"Took my son for his first real haircut. Tony was patient with him and gave him a lollipop. We're regulars now."</p><figcaption>Jessica L. · Google review</figcaption></figure>
+      <figure><p>"Got a hot towel shave the morning of my wedding. Ray took his time and it was exactly what I needed."</p><figcaption>Chris D. · Yelp review</figcaption></figure>
     </div>
   </section>
 
   <section id="visit" class="section section-dark">
     <div class="visit">
       <div>
-        <p class="eyebrow">Visit Us</p>
-        <h2>Pull up a chair</h2>
-        <p class="muted">218 Main Street, Millbrook<br>Street parking + free lot behind the building</p>
+        <h2>Hours &amp; location</h2>
+        <p>218 Main Street, Millbrook<br>Between the bakery and the bank. Free parking in the lot behind the building.</p>
         <p class="open-status" id="openStatus"></p>
         <table class="hours" id="hoursTable"></table>
+        <p class="phone">(555) 019-4400</p>
       </div>
-      <div class="visit-art" aria-hidden="true">
-        <svg viewBox="0 0 400 300">
-          <rect width="400" height="300" fill="#232323"/>
-          <g stroke="#2f2f2f" stroke-width="2"><path d="M0 60H400M0 140H400M0 220H400M80 0V300M200 0V300M320 0V300"/></g>
-          <path d="M60 300 L130 40 L170 40 L240 300" fill="none" stroke="#3a3a3a" stroke-width="22"/>
-          <circle cx="200" cy="150" r="58" fill="#c69a5a" opacity=".18"/>
-          <path d="M200 205c-30-40-48-62-48-86a48 48 0 0 1 96 0c0 24-18 46-48 86z" fill="#c69a5a"/>
-          <circle cx="200" cy="118" r="18" fill="#232323"/>
-        </svg>
-      </div>
+      <img src="img/chair.jpg" alt="A leather barber chair" class="visit-img">
     </div>
   </section>
 
   <footer class="footer">
-    <div class="logo"><span class="mark">O&amp;I</span><span>Oak &amp; Iron <small>Barber Co.</small></span></div>
-    <p>218 Main St, Millbrook · (555) 019-4400 · Walk-ins welcome when chairs are open</p>
-    <p class="small">© 2026 Oak &amp; Iron Barber Co. Demo website for a fictional business.</p>
+    <span class="logo">Oak &amp; Iron <small>Barber Co.</small></span>
+    <p class="small">© 2026 Oak &amp; Iron Barber Co. This is a demo site for a made-up business.</p>
   </footer>
 
   <div class="modal" id="modal" role="dialog" aria-modal="true"><div class="modal-card" id="modalCard"></div></div>
