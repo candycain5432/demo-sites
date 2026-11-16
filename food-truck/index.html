@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smoke & Salsa | BBQ Taco Truck</title>
+  <meta name="description" content="Smoke & Salsa — Texas BBQ meets street tacos. Order ahead, skip the line.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="demo-badge">Demo site · orders are not real</div>
+
+  <header class="nav">
+    <a href="#" class="logo"><span class="logo-mark">🔥</span> Smoke <em>&amp;</em> Salsa</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#menu">Menu</a>
+      <a href="#find-us">Find the Truck</a>
+      <a href="#catering">Catering</a>
+      <a href="#about">Our Story</a>
+    </nav>
+    <button class="cart-btn" id="cartBtn" aria-label="Open cart">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <p class="live-pill"><span class="dot"></span> <span id="liveStatus">Open now at Riverside Park · until 9 PM</span></p>
+      <h1>Texas smoke.<br><span>Street taco</span> soul.</h1>
+      <p class="hero-sub">14-hour brisket, hand-pressed tortillas, and salsas made fresh every morning. Order ahead from your phone and skip the line.</p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn btn-primary">Order Ahead →</a>
+        <a href="#find-us" class="btn btn-ghost">Where are we today?</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>4.9★</strong><span>1,200+ reviews</span></div>
+        <div><strong>~12 min</strong><span>avg. pickup</span></div>
+        <div><strong>6 days</strong><span>a week</span></div>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="plate">
+        <div class="taco">🌮</div>
+        <span class="sticker s1">Best Food Truck 2025</span>
+        <span class="sticker s2">Smoked Daily</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>BRISKET TACOS</span><span>★</span><span>SMOKED BIRRIA</span><span>★</span><span>ELOTE</span><span>★</span><span>HORCHATA</span><span>★</span><span>PULLED PORK</span><span>★</span><span>BRISKET TACOS</span><span>★</span><span>SMOKED BIRRIA</span><span>★</span><span>ELOTE</span><span>★</span><span>HORCHATA</span><span>★</span><span>PULLED PORK</span><span>★</span>
+    </div>
+  </div>
+
+  <section id="menu" class="section">
+    <div class="section-head">
+      <p class="eyebrow">The Menu</p>
+      <h2>Pick your favorites</h2>
+      <p class="muted">Tap <strong>+ Add</strong> and we'll have it hot and ready when you arrive.</p>
+    </div>
+    <div class="menu-tabs" id="menuTabs" role="tablist"></div>
+    <div class="menu-grid" id="menuGrid"></div>
+  </section>
+
+  <section id="find-us" class="section section-dark">
+    <div class="section-head">
+      <p class="eyebrow">Find the Truck</p>
+      <h2>This week's schedule</h2>
+      <p class="muted">We roll to a new spot every day. Follow along so you never miss brisket day.</p>
+    </div>
+    <div class="schedule" id="schedule"></div>
+    <div class="map-card">
+      <div class="map-art" aria-hidden="true">
+        <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="200" fill="#2a2320"/>
+          <path d="M0 140 Q100 110 200 135 T400 120" stroke="#3b6e8f" stroke-width="18" fill="none" opacity=".7"/>
+          <path d="M60 0 L90 200 M210 0 L180 200 M330 0 L310 200 M0 60 L400 80" stroke="#3a312c" stroke-width="10"/>
+          <circle cx="190" cy="78" r="40" fill="#ff5a1f" opacity=".15"/>
+          <circle cx="190" cy="78" r="10" fill="#ff5a1f"/>
+        </svg>
+      </div>
+      <div class="map-info">
+        <h3 id="todayName">Today: Riverside Park</h3>
+        <p id="todayAddr">200 River Rd · North lot by the splash pad</p>
+        <a class="btn btn-primary btn-sm" href="#" onclick="toast('In a live site, this opens directions in Maps.');return false;">Get Directions</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="catering" class="section">
+    <div class="catering">
+      <div>
+        <p class="eyebrow">Catering & Events</p>
+        <h2>Bring the truck to you</h2>
+        <p class="muted">Weddings, office lunches, block parties, graduations. We pull up, set up, and feed up to 400 guests.</p>
+        <ul class="checks">
+          <li>Full-service truck or drop-off trays</li>
+          <li>Custom menus &amp; dietary options</li>
+          <li>Booking 2–8 weeks out</li>
+        </ul>
+        <div class="estimate">
+          <label for="guestRange">Estimate for <strong id="guestOut">75</strong> guests</label>
+          <input type="range" id="guestRange" min="25" max="400" step="5" value="75">
+          <p class="estimate-price">≈ <strong id="estOut">$1,163</strong> <span>starting at $15.50 / guest</span></p>
+        </div>
+      </div>
+      <form class="card form" id="cateringForm">
+        <h3>Request a quote</h3>
+        <div class="row">
+          <label>Name<input required name="name" placeholder="Jane Doe"></label>
+          <label>Email<input required type="email" name="email" placeholder="jane@email.com"></label>
+        </div>
+        <div class="row">
+          <label>Event date<input required type="date" name="date"></label>
+          <label>Event type
+            <select name="type"><option>Wedding</option><option>Corporate</option><option>Birthday / Party</option><option>Community event</option><option>Other</option></select>
+          </label>
+        </div>
+        <label>Tell us about it<textarea name="details" rows="3" placeholder="Location, guest count, any must-haves..."></textarea></label>
+        <button class="btn btn-primary btn-block">Send Request</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="about" class="section about">
+    <div class="about-art" aria-hidden="true">🚚</div>
+    <div>
+      <p class="eyebrow">Our Story</p>
+      <h2>Started with one smoker and a dream</h2>
+      <p>Marco grew up in San Antonio between his abuela's kitchen and his uncle's pit. In 2019 he bought a beat-up truck, welded a smoker to the back, and started serving brisket tacos at the Saturday farmers market. We sold out in 90 minutes.</p>
+      <p>Today we're still family-run, still smoking every cut low and slow, and still pressing every tortilla by hand.</p>
+      <div class="reviews">
+        <blockquote>"The brisket taco changed my life. Not exaggerating."<cite>— Sam R. ★★★★★</cite></blockquote>
+        <blockquote>"Ordered ahead on my lunch break and was back at my desk in 15 minutes."<cite>— Priya K. ★★★★★</cite></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="logo">🔥 Smoke <em>&amp;</em> Salsa</div>
+    <p>Tue–Sun · 11 AM – 9 PM · (555) 014-2200 · hello@smokeandsalsa.example</p>
+    <p class="small">© 2026 Smoke &amp; Salsa. Demo website for a fictional business.</p>
+  </footer>
+
+  <!-- Cart drawer -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="drawer" id="drawer" aria-label="Your order">
+    <div class="drawer-head">
+      <h3 id="drawerTitle">Your Order</h3>
+      <button class="icon-btn" id="closeDrawer" aria-label="Close">✕</button>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+    <div class="drawer-foot" id="drawerFoot"></div>
+  </aside>
+
+  <!-- Customize modal -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true">
+    <div class="modal-card" id="modalCard"></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
