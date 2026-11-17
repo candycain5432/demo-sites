@@ -23,4 +23,4 @@ python3 -m http.server 8000
 Then open http://localhost:8000.
 
 ## Customizing
-The studio name is PixelWick Digital. Replace the placeholder `hello@example.com` email and (555) phone number in `index.html` with your business name and email.
+The studio name is PixelWick Digital. Before sharing, replace the placeholder `hello@example.com` email and (555) 000-0000 phone number in `index.html` with your real contact info.
