@@ -17,7 +17,7 @@ a { color: inherit; }
 img { max-width: 100%; display: block; }
 .hidden { display: none !important; }
 
-.demo-badge { position: fixed; bottom: 12px; left: 12px; z-index: 60; background: #fff; color: var(--muted); font-size: 12px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 3px; }
+.demo-badge { pointer-events: none; opacity: .9; position: fixed; bottom: 12px; left: 12px; z-index: 60; background: #fff; color: var(--muted); font-size: 12px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 3px; }
 body.player-open .demo-badge { bottom: 84px; }
 
 /* Nav */
