@@ -23,4 +23,4 @@ python3 -m http.server 8000
 Then open http://localhost:8000.
 
 ## Customizing
-Replace "Hometown Web Studio" and the `mailto:` link in `index.html` with your business name and email.
+The studio name is PixelWick Digital. Replace the placeholder `hello@example.com` email and (555) phone number in `index.html` with your business name and email.
