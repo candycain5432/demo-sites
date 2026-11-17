@@ -243,7 +243,7 @@ $('#prayerForm').addEventListener('submit', (e) => {
 // ===== Give =====
 let amount = 50, freq = 'once';
 function updateGive() {
-  const fee = $('#coverFees').checked ? amount * 0.029 : 0;
+  const fee = $('#coverFees').checked ? Math.round(amount * 2.9) / 100 : 0;
   $('#giveBtn').textContent = amount > 0 ? `Give $${(amount + fee).toFixed(fee ? 2 : 0)}${freq === 'monthly' ? ' monthly' : ''}` : 'Enter an amount';
   $('#giveBtn').disabled = !(amount > 0);
 }

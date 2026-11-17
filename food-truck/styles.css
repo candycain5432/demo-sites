@@ -15,7 +15,7 @@ h3 { font-weight: 700; }
 a { color: inherit; }
 img { max-width: 100%; display: block; }
 
-.demo-badge { position: fixed; bottom: 12px; left: 12px; z-index: 60; background: #fff; color: var(--muted); font-size: 12px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 4px; }
+.demo-badge { pointer-events: none; opacity: .9; position: fixed; bottom: 12px; left: 12px; z-index: 60; background: #fff; color: var(--muted); font-size: 12px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 4px; }
 
 /* Nav */
 .nav { position: sticky; top: 0; z-index: 40; display: flex; align-items: center; gap: 28px; padding: 12px 5vw; background: var(--ink); color: var(--cream); }

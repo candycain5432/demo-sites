@@ -281,16 +281,15 @@ $('#myApptLink').onclick = (e) => {
 function showNextAvailable() {
   const d = new Date(); d.setHours(0, 0, 0, 0);
   for (let i = 0; i < 7; i++) {
-    for (const b of BARBERS) {
-      const slot = slotsFor(d, b.id, 45).find((s) => s.free.length);
-      if (slot) {
-        const label = i === 0 ? 'today' : i === 1 ? 'tomorrow' : DAY_NAMES[d.getDay()];
-        $('#nextAvailText').textContent = `${label} at ${fmtTime(slot.m)}`;
-        return;
-      }
+    const open = slotsFor(d, 'any', 45).find((s) => s.free.length);
+    if (open) {
+      const label = i === 0 ? 'today' : i === 1 ? 'tomorrow' : DAY_NAMES[d.getDay()];
+      $('#nextAvail').innerHTML = `Next opening: <strong>${label} at ${fmtTime(open.m)}</strong>`;
+      return;
     }
     d.setDate(d.getDate() + 1);
   }
+  $('#nextAvail').textContent = '';
 }
 
 // ===== Hours / open status =====
