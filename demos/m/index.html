@@ -24,7 +24,6 @@
   .btn.m { color:var(--mag); border-color:var(--mag); background:rgba(255,43,214,.06); box-shadow:0 0 12px rgba(255,43,214,.35), inset 0 0 12px rgba(255,43,214,.15); }
   .btn.m:hover { background:var(--mag); color:#14000f; }
 
-  /* duotone photo */
   .duo { position:relative; overflow:hidden; background:#0a0420; }
   .duo img { filter:grayscale(1) contrast(1.25) brightness(.95); mix-blend-mode:screen; opacity:.95; }
   .duo::before { content:""; position:absolute; inset:0; background:linear-gradient(135deg,#2a0050,#001a40); z-index:0; }
@@ -197,7 +196,6 @@
 <footer>Demo site — fictional business</footer>
 
 <script>
-  // Typewriter effect on the tagline (skipped when reduced motion is requested)
   (function () {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var el = document.getElementById('tt'); var full = el.textContent; var i = 0;

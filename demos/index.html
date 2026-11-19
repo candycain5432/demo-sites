@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design Survey</title>
+<style>
+  :root { --bg:#f6f6f4; --ink:#1c1c1c; --soft:#6b6b6b; --line:#dcdcd8; --card:#fff; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); line-height:1.5; }
+  main { max-width:880px; margin:0 auto; padding:48px 16px 64px; }
+  h1 { font-size:clamp(28px,5vw,40px); font-weight:700; letter-spacing:-.01em; }
+  p.intro { color:var(--soft); margin:10px 0 32px; max-width:560px; font-size:17px; }
+  ul { list-style:none; display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+  a.card { display:flex; flex-direction:column; justify-content:space-between; height:110px; padding:16px; background:var(--card); border:1px solid var(--line); border-radius:12px; color:inherit; text-decoration:none; transition:border-color .15s, transform .15s; }
+  a.card:hover, a.card:focus-visible { border-color:var(--ink); transform:translateY(-2px); }
+  .letter { font-size:34px; font-weight:700; line-height:1; }
+  .label { font-size:15px; color:var(--soft); }
+  footer { margin-top:40px; color:var(--soft); font-size:13px; }
+  @media (prefers-reduced-motion:reduce) { a.card { transition:none; } a.card:hover { transform:none; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Design Survey</h1>
+  <p class="intro">Each design shows the same coffee shop with the same content. Open each one, scroll through it, and note which ones you like best.</p>
+  <ul>
+    <li><a class="card" href="a/index.html"><span class="letter">A</span><span class="label">Design A</span></a></li>
+    <li><a class="card" href="b/index.html"><span class="letter">B</span><span class="label">Design B</span></a></li>
+    <li><a class="card" href="c/index.html"><span class="letter">C</span><span class="label">Design C</span></a></li>
+    <li><a class="card" href="d/index.html"><span class="letter">D</span><span class="label">Design D</span></a></li>
+    <li><a class="card" href="e/index.html"><span class="letter">E</span><span class="label">Design E</span></a></li>
+    <li><a class="card" href="f/index.html"><span class="letter">F</span><span class="label">Design F</span></a></li>
+    <li><a class="card" href="g/index.html"><span class="letter">G</span><span class="label">Design G</span></a></li>
+    <li><a class="card" href="h/index.html"><span class="letter">H</span><span class="label">Design H</span></a></li>
+    <li><a class="card" href="i/index.html"><span class="letter">I</span><span class="label">Design I</span></a></li>
+    <li><a class="card" href="j/index.html"><span class="letter">J</span><span class="label">Design J</span></a></li>
+    <li><a class="card" href="k/index.html"><span class="letter">K</span><span class="label">Design K</span></a></li>
+    <li><a class="card" href="l/index.html"><span class="letter">L</span><span class="label">Design L</span></a></li>
+    <li><a class="card" href="m/index.html"><span class="letter">M</span><span class="label">Design M</span></a></li>
+    <li><a class="card" href="n/index.html"><span class="letter">N</span><span class="label">Design N</span></a></li>
+    <li><a class="card" href="o/index.html"><span class="letter">O</span><span class="label">Design O</span></a></li>
+    <li><a class="card" href="p/index.html"><span class="letter">P</span><span class="label">Design P</span></a></li>
+    <li><a class="card" href="q/index.html"><span class="letter">Q</span><span class="label">Design Q</span></a></li>
+  </ul>
+  <footer>Demo sites for a fictional business.</footer>
+</main>
+</body>
+</html>

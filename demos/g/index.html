@@ -17,7 +17,6 @@
   .wrap { max-width:1160px; margin:0 auto; padding:0 24px; }
   h1,h2,h3,.syne { font-family:'Syne',sans-serif; }
 
-  /* progress bar */
   .progress { position:fixed; top:0; left:0; height:3px; width:100%; transform-origin:left; transform:scaleX(0); background:linear-gradient(90deg,var(--amber),var(--ember)); z-index:100; }
 
   .btn { position:relative; display:inline-flex; align-items:center; gap:10px; overflow:hidden; font-weight:700; padding:15px 28px; border-radius:999px; border:2px solid var(--amber); color:var(--bg); background:var(--amber); isolation:isolate; transition:color .35s; }
@@ -69,7 +68,6 @@
   section { padding:120px 0; position:relative; }
   .sh { font-size:clamp(44px,6.4vw,92px); font-weight:800; letter-spacing:-.03em; line-height:1; margin-bottom:56px; }
 
-  /* reveal on scroll */
   .js .rv { opacity:0; transform:translateY(50px); transition:opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
   .js .rv.l { transform:translateX(-60px); } .js .rv.r { transform:translateX(60px); } .js .rv.s { transform:scale(.88); }
   .js .rv.in { opacity:1; transform:none; }
@@ -211,7 +209,6 @@
   var nav = document.querySelector('nav');
   var bar = document.querySelector('.progress');
 
-  // Split the About paragraph into words for a scroll-linked highlight (text content stays identical)
   var about = document.getElementById('aboutText');
   if (!reduce) {
     var words = about.textContent.split(' ');
@@ -219,7 +216,6 @@
   }
   var wordEls = about.querySelectorAll('.word');
 
-  // Scroll-triggered reveals
   var rvs = document.querySelectorAll('.rv');
   if (reduce || !('IntersectionObserver' in window)) { rvs.forEach(function (e) { e.classList.add('in'); }); }
   else {
@@ -247,7 +243,6 @@
   window.addEventListener('scroll', function () { requestAnimationFrame(onScroll); }, { passive:true });
   onScroll();
 
-  // 3D tilt on menu cards
   if (!reduce && window.matchMedia('(hover: hover)').matches) {
     document.querySelectorAll('.item').forEach(function (card) {
       card.addEventListener('mousemove', function (e) {

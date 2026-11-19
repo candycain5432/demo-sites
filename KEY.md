@@ -21,3 +21,8 @@ Do not share with respondents. Letters were assigned in random order.
 | O | Minimalist | Lots of whitespace, two colors, restrained Apple-like type |
 | P | Bold typography | Giant type as the main visual; photos used sparingly |
 | Q | Bento grid | All content arranged in rounded tiles of varying sizes |
+
+## Notes
+- Survey gallery: `demos/index.html` (lists designs by letter only). The repo root `index.html` is the existing studio landing page and was left unchanged.
+- This file is plain Markdown in the repo. If the repo is published (e.g. GitHub Pages), anyone who guesses the URL can read it, so remove it from the published copy before sending the survey.
+- Every demo uses identical text and the same five photos from `assets/photos/` (credits in `assets/photos/CREDITS.md`).
