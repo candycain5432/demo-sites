@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember &amp; Oak Coffee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bungee&family=Bungee+Shade&family=Rubik:wght@500;700;900&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root { --hot:#ff2e63; --sun:#ffc93c; --teal:#08d9d6; --plum:#5b1865; --grass:#3ec300; --tang:#ff7b25; --navy:#1a1150; --cream:#fff4d6; --ink:#1a0b14; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Rubik',system-ui,sans-serif; font-weight:500; color:var(--ink); line-height:1.5; font-size:17px; overflow-x:hidden;
+    background-color:var(--plum);
+    background-image: radial-gradient(var(--hot) 2.5px, transparent 3px), radial-gradient(var(--sun) 2.5px, transparent 3px);
+    background-size:34px 34px; background-position:0 0, 17px 17px; }
+  a { color:inherit; text-decoration:none; }
+  img { display:block; width:100%; height:100%; object-fit:cover; }
+  .wrap { max-width:1200px; margin:0 auto; padding:0 18px; position:relative; }
+  .abril { font-family:'Abril Fatface',Georgia,serif; font-weight:400; }
+  .bungee { font-family:'Bungee',Impact,sans-serif; font-weight:400; }
+  .hand { font-family:'Caveat',cursive; }
+
+  .p-check { background:repeating-conic-gradient(var(--ink) 0 25%, var(--cream) 0 50%) 0 0/28px 28px; }
+  .p-stripe { background:repeating-linear-gradient(45deg,var(--hot) 0 14px,var(--sun) 14px 28px); }
+  .p-stripe2 { background:repeating-linear-gradient(-45deg,var(--teal) 0 12px,var(--navy) 12px 24px); }
+  .p-zig { background:linear-gradient(135deg,var(--tang) 25%,transparent 25%) -14px 0/28px 28px, linear-gradient(225deg,var(--tang) 25%,transparent 25%) -14px 0/28px 28px, linear-gradient(315deg,var(--tang) 25%,transparent 25%) 0 0/28px 28px, linear-gradient(45deg,var(--tang) 25%,var(--cream) 25%) 0 0/28px 28px; }
+  .p-dots { background:var(--teal) radial-gradient(var(--navy) 3px,transparent 3.5px) 0 0/18px 18px; }
+  .p-wave { background:radial-gradient(circle at 50% 100%, transparent 10px, var(--grass) 11px 16px, transparent 17px) 0 0/34px 18px, var(--sun); }
+
+  .btn { display:inline-block; font-family:'Bungee',sans-serif; font-size:17px; padding:14px 24px; background:var(--sun); color:var(--ink); border:4px solid var(--ink); border-radius:999px; box-shadow:5px 5px 0 var(--hot), 10px 10px 0 var(--ink); transition:transform .2s, box-shadow .2s; }
+  .btn:hover { transform:translate(-3px,-3px) rotate(-2deg); box-shadow:8px 8px 0 var(--hot), 14px 14px 0 var(--ink); }
+  .btn.hot { background:var(--hot); color:#fff; box-shadow:5px 5px 0 var(--teal), 10px 10px 0 var(--ink); }
+
+  nav { background:var(--ink); border-bottom:8px solid transparent; border-image:repeating-linear-gradient(90deg,var(--hot) 0 20px,var(--sun) 20px 40px,var(--teal) 40px 60px,var(--grass) 60px 80px) 8; position:relative; z-index:5; }
+  nav .wrap { display:flex; align-items:center; justify-content:space-between; gap:12px; padding-top:14px; padding-bottom:14px; flex-wrap:wrap; }
+  .logo { font-family:'Bungee',sans-serif; font-size:20px; color:var(--sun); line-height:1.1; text-shadow:2px 2px 0 var(--hot); }
+  .links { display:flex; align-items:center; gap:8px; }
+  .links a.l { font-family:'Bungee',sans-serif; font-size:14px; color:#fff; padding:6px 12px; border-radius:999px; border:2px solid transparent; }
+  .links a.l:nth-child(1) { background:var(--hot); } .links a.l:nth-child(2) { background:var(--teal); color:var(--ink); } .links a.l:nth-child(3) { background:var(--grass); color:var(--ink); }
+  .links a.l:hover { border-color:#fff; transform:rotate(-4deg); }
+  .links .btn { font-size:13px; padding:8px 14px; box-shadow:3px 3px 0 var(--hot); border-width:3px; }
+
+  .hero { padding:56px 0 90px; position:relative; }
+  .hero .grid { display:grid; grid-template-columns:1.05fr 1fr; gap:30px; align-items:center; }
+  .hero .title { background:var(--cream); border:5px solid var(--ink); padding:28px 28px 34px; position:relative; transform:rotate(-1.5deg); box-shadow:14px 14px 0 var(--teal), 14px 14px 0 5px var(--ink); }
+  .hero .title::before { content:""; position:absolute; inset:10px; border:3px dashed var(--hot); pointer-events:none; }
+  .hero h1 { font-size:clamp(46px,7vw,98px); line-height:.92; }
+  .hero h1 .a { color:var(--hot); text-shadow:4px 4px 0 var(--sun); }
+  .hero h1 .b { display:block; font-family:'Bungee Shade',sans-serif; font-size:.58em; color:var(--plum); letter-spacing:.02em; margin-top:8px; }
+  .hero .tag { display:inline-block; background:var(--navy); color:var(--sun); padding:8px 14px; margin:20px 0 26px; font-weight:700; font-size:clamp(17px,1.9vw,21px); transform:rotate(1deg); }
+  .hero .photo { position:relative; padding:18px; border:5px solid var(--ink); transform:rotate(3deg); box-shadow:-14px 14px 0 var(--sun), -14px 14px 0 5px var(--ink); }
+  .hero .photo .in { border:5px solid var(--ink); aspect-ratio:4/3; overflow:hidden; }
+  .hero .photo img { filter:saturate(1.5) contrast(1.1); }
+  .burst { position:absolute; display:grid; place-items:center; text-align:center; font-family:'Bungee',sans-serif; color:var(--ink); z-index:3; }
+  .burst svg { position:absolute; inset:0; width:100%; height:100%; animation:spin 30s linear infinite; }
+  .burst span { position:relative; line-height:1; }
+  .b1 { width:130px; height:130px; right:-30px; top:-48px; font-size:22px; }
+  .b2 { width:96px; height:96px; left:-36px; bottom:-30px; font-size:15px; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .sticker { position:absolute; z-index:4; font-size:30px; color:var(--hot); }
+  .squig { position:absolute; pointer-events:none; }
+
+  .band { border-top:5px solid var(--ink); border-bottom:5px solid var(--ink); height:46px; }
+  section, .hero { padding:80px 0; position:relative; overflow-x:clip; }
+  .sh { display:inline-block; font-family:'Abril Fatface',serif; font-size:clamp(46px,7vw,92px); line-height:1; color:#fff; -webkit-text-stroke:3px var(--ink); paint-order:stroke fill; text-shadow:6px 6px 0 var(--hot), 10px 10px 0 var(--ink); margin-bottom:40px; transform:rotate(-2deg); }
+
+  .about { background:var(--tang); }
+  .about .grid { display:grid; grid-template-columns:1fr 1fr; gap:46px; align-items:center; }
+  .about .card { background:var(--cream); border:5px solid var(--ink); padding:34px; position:relative; box-shadow:12px 12px 0 var(--plum), 12px 12px 0 5px var(--ink); }
+  .about .card p { font-size:clamp(22px,2.5vw,30px); font-weight:700; line-height:1.3; }
+  .about .card p::first-line { color:var(--hot); }
+  .about .tape { position:absolute; width:120px; height:34px; top:-20px; left:40%; transform:rotate(-6deg); opacity:.9; border:2px solid var(--ink); }
+  .about .pic { position:relative; aspect-ratio:1/1; border-radius:50%; border:6px solid var(--ink); overflow:hidden; box-shadow:0 0 0 14px var(--sun), 0 0 0 19px var(--ink), 0 0 0 34px var(--hot), 0 0 0 39px var(--ink); max-width:440px; margin:40px auto; }
+
+  .menu { background:var(--cream); }
+  .menu .sh { color:var(--sun); }
+  .items { display:grid; grid-template-columns:repeat(3,1fr); gap:34px; }
+  .item { background:#fff; border:5px solid var(--ink); position:relative; transition:transform .3s; }
+  .item:nth-child(1) { transform:rotate(-2deg); } .item:nth-child(2) { transform:rotate(1.5deg) translateY(16px); } .item:nth-child(3) { transform:rotate(-1deg); }
+  .item:hover { transform:rotate(0) scale(1.03); z-index:2; }
+  .item .frame { padding:14px; border-bottom:5px solid var(--ink); }
+  .item .frame .in { aspect-ratio:1/1; border:4px solid var(--ink); overflow:hidden; }
+  .item .frame img { filter:saturate(1.4); }
+  .item:nth-child(1) .frame { background:var(--hot); } .item:nth-child(2) .frame { background:var(--teal); } .item:nth-child(3) .frame { background:var(--grass); }
+  .item .b { padding:18px 20px 22px; }
+  .item h3 { font-family:'Bungee',sans-serif; font-weight:400; font-size:22px; line-height:1.1; }
+  .item p { margin-top:6px; }
+  .tagprice { position:absolute; top:-34px; right:-22px; width:112px; height:112px; display:grid; place-items:center; z-index:3; font-family:'Abril Fatface',serif; font-size:21px; color:var(--ink); transform:rotate(12deg); }
+  .tagprice svg { position:absolute; inset:0; width:100%; height:100%; }
+  .tagprice span { position:relative; }
+
+  .reviews { background:var(--navy); }
+  .reviews .sh { color:var(--teal); text-shadow:6px 6px 0 var(--sun), 10px 10px 0 var(--ink); }
+  .reviews .grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+  .bubble { position:relative; background:var(--sun); border:5px solid var(--ink); border-radius:40px; padding:32px 34px; box-shadow:10px 10px 0 var(--hot); }
+  .bubble:nth-child(2) { background:var(--teal); box-shadow:10px 10px 0 var(--sun); transform:rotate(1.5deg); margin-top:30px; }
+  .bubble:nth-child(1) { transform:rotate(-1.5deg); }
+  .bubble::after { content:""; position:absolute; left:50px; bottom:-30px; width:34px; height:34px; background:inherit; border-right:5px solid var(--ink); border-bottom:5px solid var(--ink); transform:skewY(30deg) rotate(30deg); }
+  .bubble p { font-size:clamp(20px,2.2vw,26px); font-weight:900; line-height:1.25; }
+  .bubble cite { display:block; margin-top:14px; font-family:'Caveat',cursive; font-style:normal; font-size:30px; color:var(--plum); }
+
+  .visit { background:var(--hot); }
+  .visit .board { background:var(--cream); border:5px solid var(--ink); padding:38px; display:grid; grid-template-columns:1fr 1fr auto; gap:28px; align-items:center; box-shadow:14px 14px 0 var(--sun), 14px 14px 0 5px var(--ink); position:relative; }
+  .visit .board .k { font-family:'Bungee',sans-serif; font-size:14px; color:var(--hot); }
+  .visit .board .v { font-family:'Abril Fatface',serif; font-size:clamp(24px,2.6vw,34px); line-height:1.1; }
+  footer { background:var(--ink); color:var(--sun); text-align:center; padding:22px 0; font-family:'Bungee',sans-serif; font-size:13px; letter-spacing:.04em; border-top:8px solid transparent; border-image:repeating-linear-gradient(90deg,var(--hot) 0 20px,var(--sun) 20px 40px,var(--teal) 40px 60px,var(--grass) 60px 80px) 8; }
+
+  @media (max-width:880px) {
+    .hero .grid, .about .grid, .reviews .grid, .visit .board { grid-template-columns:1fr; }
+    .hero .photo { margin:20px 14px 0 24px; }
+    .items { grid-template-columns:1fr; max-width:420px; margin:0 auto; gap:56px; }
+    .item:nth-child(2) { transform:rotate(1.5deg); }
+    .about .pic { max-width:300px; }
+  }
+  @media (max-width:600px) {
+    .links { width:100%; justify-content:space-between; gap:4px; }
+    .links a.l { font-size:12px; padding:6px 9px; }
+    .links .btn { font-size:11px; padding:7px 10px; white-space:nowrap; }
+    .logo { font-size:18px; }
+    .hero { padding:36px 0 70px; }
+    .hero .title { padding:22px 20px 26px; box-shadow:9px 9px 0 var(--teal), 9px 9px 0 4px var(--ink); }
+    .b1 { width:100px; height:100px; right:-10px; top:-40px; font-size:17px; }
+    .b2 { left:-16px; }
+    section { padding:60px 0; }
+    .about .card { padding:26px; }
+    .visit .board { padding:28px 22px; }
+    .tagprice { right:-8px; }
+  }
+  @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .burst svg { animation:none; } * { transition:none !important; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="star" viewBox="0 0 100 100"><path d="M50 0 L58 22 L79 10 L74 34 L98 36 L80 52 L96 70 L72 72 L74 96 L54 82 L40 100 L34 76 L10 84 L20 62 L0 50 L20 38 L10 16 L34 24 L40 0 Z" stroke="#1a0b14" stroke-width="4" stroke-linejoin="round"/></symbol>
+  <symbol id="scallop" viewBox="0 0 100 100"><path d="M50 4 C58 4 60 12 67 14 C74 16 80 10 86 16 C92 22 86 28 88 35 C90 42 98 44 98 52 C98 60 90 62 88 69 C86 76 92 82 86 88 C80 94 74 88 67 90 C60 92 58 98 50 98 C42 98 40 92 33 90 C26 88 20 94 14 88 C8 82 14 76 12 69 C10 62 2 60 2 52 C2 44 10 42 12 35 C14 28 8 22 14 16 C20 10 26 16 33 14 C40 12 42 4 50 4 Z" stroke="#1a0b14" stroke-width="4"/></symbol>
+</svg>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#">Ember &amp; Oak Coffee</a>
+    <div class="links">
+      <a class="l" href="#menu">Menu</a>
+      <a class="l" href="#about">About</a>
+      <a class="l" href="#visit">Visit</a>
+      <a class="btn" href="#menu">Order Online</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap grid">
+    <div class="title">
+      <span class="sticker" style="right:22px;top:16px" aria-hidden="true">✦</span>
+      <span class="sticker" style="right:58px;top:46px;color:var(--teal);font-size:20px" aria-hidden="true">✺</span>
+      <h1 class="abril"><span class="a">Ember &amp; Oak</span> <span class="b">Coffee</span></h1>
+      <p class="tag">Small-batch coffee, roasted down the street.</p><br>
+      <a class="btn hot" href="#menu">See the Menu ★</a>
+    </div>
+    <div class="photo p-stripe">
+      <div class="burst b1" aria-hidden="true"><svg viewBox="0 0 100 100" fill="#ffc93c"><use href="#star"/></svg><span>★</span></div>
+      <div class="in"><img src="../../assets/photos/hero.jpg" alt="Sunlit café interior with people at tables"></div>
+      <div class="burst b2" aria-hidden="true"><svg viewBox="0 0 100 100" fill="#08d9d6"><use href="#scallop"/></svg><span>✿</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="band p-check" aria-hidden="true"></div>
+<section class="about" id="about">
+  <svg class="squig" style="right:4%;top:30px;width:180px" viewBox="0 0 180 40" aria-hidden="true"><path d="M5 20 Q20 0 35 20 T65 20 T95 20 T125 20 T155 20 T185 20" fill="none" stroke="#1a0b14" stroke-width="6" stroke-linecap="round"/></svg>
+  <div class="wrap">
+    <h2 class="sh">About</h2>
+    <div class="grid">
+      <div class="card"><span class="tape p-stripe2" aria-hidden="true"></span><p>We started roasting in a garage in 2019. Today we roast every bean in-house and serve it the same week.</p></div>
+      <div class="pic"><img src="../../assets/photos/about.jpg" alt="Freshly roasted coffee beans being scooped from a roaster"></div>
+    </div>
+  </div>
+</section>
+<div class="band p-zig" aria-hidden="true"></div>
+
+<section class="menu" id="menu">
+  <div class="wrap">
+    <h2 class="sh">Menu</h2>
+    <div class="items">
+      <article class="item"><div class="tagprice"><svg viewBox="0 0 100 100" fill="#ffc93c"><use href="#star"/></svg><span>$3.00</span></div><div class="frame"><div class="in"><img src="../../assets/photos/drip.jpg" alt="Coffee being poured into a white mug"></div></div><div class="b p-none"><h3>House Drip</h3><p>Our everyday medium roast.</p></div></article>
+      <article class="item"><div class="tagprice"><svg viewBox="0 0 100 100" fill="#ff7b25"><use href="#scallop"/></svg><span>$5.50</span></div><div class="frame"><div class="in"><img src="../../assets/photos/latte.jpg" alt="Latte with leaf art on a saucer"></div></div><div class="b"><h3>Honey Oat Latte</h3><p>Espresso, oat milk, local honey.</p></div></article>
+      <article class="item"><div class="tagprice"><svg viewBox="0 0 100 100" fill="#ff2e63"><use href="#star"/></svg><span>$4.75</span></div><div class="frame"><div class="in"><img src="../../assets/photos/coldbrew.jpg" alt="Glass of iced cold brew"></div></div><div class="b"><h3>Cold Brew</h3><p>Steeped 18 hours, served over ice.</p></div></article>
+    </div>
+  </div>
+</section>
+<div class="band p-wave" aria-hidden="true"></div>
+
+<section class="reviews">
+  <div class="wrap">
+    <h2 class="sh">Reviews</h2>
+    <div class="grid">
+      <figure class="bubble"><p>“Best cold brew in town, and the baristas remember my order.”</p><figcaption><cite>Sam R.</cite></figcaption></figure>
+      <figure class="bubble"><p>“The honey oat latte is worth the walk. Cozy spot to work, too.”</p><figcaption><cite>Jordan T.</cite></figcaption></figure>
+    </div>
+  </div>
+</section>
+<div class="band p-dots" aria-hidden="true"></div>
+
+<section class="visit" id="visit">
+  <div class="wrap">
+    <h2 class="sh">Visit</h2>
+    <div class="board">
+      <div class="v">123 Example St, Anytown</div>
+      <div class="v">Mon–Sat 7am–6pm</div>
+      <a class="btn" href="#menu">Order Online</a>
+    </div>
+  </div>
+</section>
+<footer>Demo site — fictional business</footer>
+</body>
+</html>

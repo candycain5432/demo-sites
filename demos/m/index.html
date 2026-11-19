@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember &amp; Oak Coffee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#05060a; --panel:#0b0e17; --line:#1b2233; --cyan:#00f0ff; --mag:#ff2bd6; --lime:#b6ff3b; --txt:#c6d1e6; --dim:#5d6a85; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--txt); font-family:'JetBrains Mono',ui-monospace,monospace; font-size:15px; line-height:1.65; overflow-x:hidden; }
+  body::before { content:""; position:fixed; inset:0; pointer-events:none; z-index:100; background:repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 3px); }
+  a { color:inherit; text-decoration:none; }
+  img { display:block; width:100%; }
+  .wrap { max-width:1180px; margin:0 auto; padding:0 22px; }
+  .orb { font-family:'Orbitron',sans-serif; text-transform:uppercase; }
+  .glow-c { color:var(--cyan); text-shadow:0 0 8px rgba(0,240,255,.7), 0 0 24px rgba(0,240,255,.35); }
+  .glow-m { color:var(--mag); text-shadow:0 0 8px rgba(255,43,214,.7), 0 0 24px rgba(255,43,214,.35); }
+  .btn { display:inline-block; font-family:'Orbitron',sans-serif; font-weight:800; text-transform:uppercase; letter-spacing:.12em; font-size:13px; color:var(--cyan); padding:13px 22px; border:1px solid var(--cyan); background:rgba(0,240,255,.06); box-shadow:0 0 12px rgba(0,240,255,.35), inset 0 0 12px rgba(0,240,255,.15); clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px); transition:background .2s, color .2s, box-shadow .2s; }
+  .btn:hover { background:var(--cyan); color:#001014; box-shadow:0 0 28px rgba(0,240,255,.8); }
+  .btn.m { color:var(--mag); border-color:var(--mag); background:rgba(255,43,214,.06); box-shadow:0 0 12px rgba(255,43,214,.35), inset 0 0 12px rgba(255,43,214,.15); }
+  .btn.m:hover { background:var(--mag); color:#14000f; }
+
+  .duo { position:relative; overflow:hidden; background:#0a0420; }
+  .duo img { filter:grayscale(1) contrast(1.25) brightness(.95); mix-blend-mode:screen; opacity:.95; }
+  .duo::before { content:""; position:absolute; inset:0; background:linear-gradient(135deg,#2a0050,#001a40); z-index:0; }
+  .duo img { position:relative; z-index:1; }
+  .duo::after { content:""; position:absolute; inset:0; z-index:2; background:linear-gradient(135deg,rgba(255,43,214,.55),rgba(0,240,255,.45)); mix-blend-mode:multiply; pointer-events:none; }
+  .duo .scan { position:absolute; inset:0; z-index:3; background:repeating-linear-gradient(0deg,rgba(0,0,0,.25) 0 2px,transparent 2px 4px); pointer-events:none; }
+  .corners { position:relative; }
+  .corners::before, .corners::after { content:""; position:absolute; width:22px; height:22px; border:2px solid var(--cyan); z-index:4; filter:drop-shadow(0 0 4px var(--cyan)); }
+  .corners::before { top:-6px; left:-6px; border-right:0; border-bottom:0; }
+  .corners::after { bottom:-6px; right:-6px; border-left:0; border-top:0; }
+
+  nav { position:sticky; top:0; z-index:50; background:rgba(5,6,10,.82); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  nav .wrap { display:flex; align-items:center; justify-content:space-between; gap:14px; min-height:64px; flex-wrap:wrap; }
+  .logo { font-family:'Orbitron',sans-serif; font-weight:900; font-size:15px; letter-spacing:.08em; text-transform:uppercase; }
+  .logo b { color:var(--mag); }
+  .links { display:flex; align-items:center; gap:22px; font-size:13px; }
+  .links a.l { color:var(--dim); } .links a.l::before { content:"/"; color:var(--mag); margin-right:2px; }
+  .links a.l:hover { color:var(--cyan); }
+  .links .btn { padding:9px 14px; font-size:11px; }
+
+  .hero { position:relative; padding:84px 0 110px; overflow:hidden; border-bottom:1px solid var(--line); }
+  .hero .bgimg { position:absolute; inset:0; opacity:.35; }
+  .hero .bgimg img { height:100%; object-fit:cover; }
+  .hero::after { content:""; position:absolute; left:-50%; right:-50%; bottom:-10px; height:260px; background:
+      linear-gradient(transparent 0, var(--bg) 92%),
+      repeating-linear-gradient(90deg, rgba(0,240,255,.35) 0 1px, transparent 1px 60px),
+      repeating-linear-gradient(0deg, rgba(0,240,255,.35) 0 1px, transparent 1px 40px);
+    transform:perspective(300px) rotateX(55deg); transform-origin:bottom; z-index:1; }
+  .hero .wrap { position:relative; z-index:2; }
+  .prompt { font-size:13px; color:var(--lime); margin-bottom:22px; }
+  .prompt span { color:var(--dim); }
+  .hero h1 { font-family:'Orbitron',sans-serif; font-weight:900; text-transform:uppercase; font-size:clamp(40px,8vw,104px); line-height:.95; letter-spacing:.02em; }
+  .hero h1 .l2 { display:block; color:transparent; -webkit-text-stroke:2px var(--cyan); filter:drop-shadow(0 0 10px rgba(0,240,255,.6)); }
+  .glitch { position:relative; display:inline-block; }
+  .glitch::before, .glitch::after { content:attr(data-t); position:absolute; left:0; top:0; width:100%; overflow:hidden; }
+  .glitch::before { color:var(--mag); transform:translate(3px,0); clip-path:inset(0 0 60% 0); animation:g1 3.2s infinite steps(1); opacity:.8; }
+  .glitch::after { color:var(--cyan); transform:translate(-3px,0); clip-path:inset(55% 0 0 0); animation:g2 2.7s infinite steps(1); opacity:.8; }
+  @keyframes g1 { 0%,92%{clip-path:inset(0 0 100% 0)} 93%{clip-path:inset(10% 0 60% 0)} 96%{clip-path:inset(40% 0 30% 0)} }
+  @keyframes g2 { 0%,88%{clip-path:inset(100% 0 0 0)} 89%{clip-path:inset(60% 0 10% 0)} 94%{clip-path:inset(20% 0 55% 0)} }
+  .typed { font-size:clamp(16px,2vw,20px); margin:26px 0 36px; color:var(--txt); min-height:1.6em; }
+  .typed .cur { display:inline-block; width:.6em; height:1.1em; background:var(--cyan); vertical-align:-3px; margin-left:3px; box-shadow:0 0 8px var(--cyan); animation:blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity:0; } }
+
+  section { padding:88px 0; border-bottom:1px solid var(--line); }
+  .sh { display:flex; align-items:center; gap:14px; margin-bottom:40px; }
+  .sh h2 { font-family:'Orbitron',sans-serif; font-weight:800; text-transform:uppercase; font-size:clamp(26px,3.6vw,40px); letter-spacing:.06em; }
+  .sh .idx { color:var(--mag); font-size:13px; }
+  .sh .bar { flex:1; height:1px; background:linear-gradient(90deg,var(--cyan),transparent); box-shadow:0 0 6px var(--cyan); }
+
+  .about .grid { display:grid; grid-template-columns:1.1fr 1fr; gap:48px; align-items:center; }
+  .term { background:var(--panel); border:1px solid var(--line); border-radius:8px; overflow:hidden; box-shadow:0 0 0 1px rgba(0,240,255,.1), 0 20px 50px -20px rgba(0,240,255,.25); }
+  .term .tb { display:flex; gap:6px; padding:10px 12px; border-bottom:1px solid var(--line); }
+  .term .tb i { width:10px; height:10px; border-radius:50%; background:#2a3247; } .term .tb i:first-child { background:var(--mag); } .term .tb i:nth-child(2) { background:var(--lime); }
+  .term .body { padding:22px; font-size:clamp(16px,1.6vw,19px); }
+  .term .body .c { color:var(--dim); }
+  .term .body .k { color:var(--lime); }
+  .about .duo { aspect-ratio:1/1; border-radius:4px; }
+
+  .items { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .item { background:var(--panel); border:1px solid var(--line); border-radius:6px; overflow:hidden; transition:border-color .25s, box-shadow .25s, transform .25s; }
+  .item:hover { border-color:var(--cyan); box-shadow:0 0 24px rgba(0,240,255,.3); transform:translateY(-3px); }
+  .item .duo { aspect-ratio:4/3; }
+  .item .duo img { height:100%; object-fit:cover; }
+  .item .b { padding:18px 20px 20px; }
+  .item .id { font-size:11px; color:var(--dim); }
+  .item h3 { font-family:'Orbitron',sans-serif; font-weight:800; text-transform:uppercase; font-size:19px; letter-spacing:.04em; margin:4px 0 6px; color:#fff; }
+  .item p { color:var(--txt); }
+  .item .price { margin-top:14px; display:flex; justify-content:space-between; align-items:center; border-top:1px dashed var(--line); padding-top:12px; font-weight:700; font-size:18px; }
+  .item:nth-child(even) .price { color:var(--mag); text-shadow:0 0 8px rgba(255,43,214,.6); }
+  .item:nth-child(odd) .price { color:var(--cyan); text-shadow:0 0 8px rgba(0,240,255,.6); }
+
+  .reviews .grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  .rv { background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--mag); padding:24px; border-radius:4px; }
+  .rv:nth-child(2) { border-left-color:var(--cyan); }
+  .rv p { font-size:17px; color:#e6ecf8; }
+  .rv .who { margin-top:14px; font-size:13px; color:var(--lime); }
+  .rv .who::before { content:"> user: "; color:var(--dim); }
+
+  .visit .panel { display:grid; grid-template-columns:1fr 1fr auto; gap:24px; align-items:center; background:var(--panel); border:1px solid var(--line); padding:28px; border-radius:6px; }
+  .kv span { display:block; font-size:11px; color:var(--dim); text-transform:uppercase; letter-spacing:.14em; }
+  .kv b { font-size:18px; color:#fff; font-weight:600; }
+  footer { padding:26px 0 40px; text-align:center; color:var(--dim); font-size:12px; }
+
+  @media (max-width:860px) {
+    .about .grid, .reviews .grid, .visit .panel { grid-template-columns:1fr; }
+    .items { grid-template-columns:1fr; max-width:460px; }
+  }
+  @media (max-width:600px) {
+    nav .wrap { padding-top:10px; padding-bottom:10px; row-gap:8px; }
+    .links { width:100%; justify-content:space-between; gap:10px; }
+    .hero { padding:56px 0 90px; }
+    .hero h1 .l2 { -webkit-text-stroke:1.4px var(--cyan); }
+    section { padding:60px 0; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    html { scroll-behavior:auto; }
+    .glitch::before, .glitch::after { animation:none; display:none; }
+    .typed .cur { animation:none; }
+    * { transition:none !important; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#"><span class="glow-c">Ember</span> <b>&amp;</b> <span class="glow-c">Oak Coffee</span></a>
+    <div class="links">
+      <a class="l" href="#menu">Menu</a>
+      <a class="l" href="#about">About</a>
+      <a class="l" href="#visit">Visit</a>
+      <a class="btn m" href="#menu">Order Online</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="bgimg duo"><img src="../../assets/photos/hero.jpg" alt="Sunlit café interior with people at tables"><span class="scan"></span></div>
+  <div class="wrap">
+    <div class="prompt">root@ember-oak<span>:~$</span> ./brew --start</div>
+    <h1><span class="glitch glow-m" data-t="Ember &amp;">Ember &amp;</span> <span class="l2">Oak Coffee</span></h1>
+    <p class="typed"><span id="tt">Small-batch coffee, roasted down the street.</span><span class="cur" aria-hidden="true"></span></p>
+    <a class="btn" href="#menu">See the Menu</a>
+  </div>
+</header>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="sh"><span class="idx">[01]</span><h2 class="glow-c">About</h2><span class="bar"></span></div>
+    <div class="grid">
+      <div class="term">
+        <div class="tb" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="body"><span class="k" aria-hidden="true">$ cat about.txt</span><br>We started roasting in a garage in 2019. Today we roast every bean in-house and serve it the same week.</div>
+      </div>
+      <div class="duo corners"><img src="../../assets/photos/about.jpg" alt="Freshly roasted coffee beans being scooped from a roaster"><span class="scan"></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="sh"><span class="idx">[02]</span><h2 class="glow-c">Menu</h2><span class="bar"></span></div>
+    <div class="items">
+      <article class="item"><div class="duo"><img src="../../assets/photos/drip.jpg" alt="Coffee being poured into a white mug"><span class="scan"></span></div><div class="b"><div class="id">0x01</div><h3>House Drip</h3><p>Our everyday medium roast.</p><div class="price"><span>$3.00</span></div></div></article>
+      <article class="item"><div class="duo"><img src="../../assets/photos/latte.jpg" alt="Latte with leaf art on a saucer"><span class="scan"></span></div><div class="b"><div class="id">0x02</div><h3>Honey Oat Latte</h3><p>Espresso, oat milk, local honey.</p><div class="price"><span>$5.50</span></div></div></article>
+      <article class="item"><div class="duo"><img src="../../assets/photos/coldbrew.jpg" alt="Glass of iced cold brew"><span class="scan"></span></div><div class="b"><div class="id">0x03</div><h3>Cold Brew</h3><p>Steeped 18 hours, served over ice.</p><div class="price"><span>$4.75</span></div></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="wrap">
+    <div class="sh"><span class="idx">[03]</span><h2 class="glow-c">Reviews</h2><span class="bar"></span></div>
+    <div class="grid">
+      <figure class="rv"><p>“Best cold brew in town, and the baristas remember my order.”</p><figcaption class="who">Sam R.</figcaption></figure>
+      <figure class="rv"><p>“The honey oat latte is worth the walk. Cozy spot to work, too.”</p><figcaption class="who">Jordan T.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="wrap">
+    <div class="sh"><span class="idx">[04]</span><h2 class="glow-c">Visit</h2><span class="bar"></span></div>
+    <div class="panel">
+      <div class="kv"><span aria-hidden="true">location</span><b>123 Example St, Anytown</b></div>
+      <div class="kv"><span aria-hidden="true">uptime</span><b>Mon–Sat 7am–6pm</b></div>
+      <a class="btn m" href="#menu">Order Online</a>
+    </div>
+  </div>
+</section>
+<footer>Demo site — fictional business</footer>
+
+<script>
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var el = document.getElementById('tt'); var full = el.textContent; var i = 0;
+    el.setAttribute('aria-label', full); el.textContent = '';
+    (function step() { el.textContent = full.slice(0, ++i); if (i < full.length) setTimeout(step, 38); })();
+  })();
+</script>
+</body>
+</html>

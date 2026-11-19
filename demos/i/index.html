@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember &amp; Oak Coffee</title>
+<style>
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:#fff; color:#000; font-family:"Times New Roman",Times,serif; font-size:18px; line-height:1.35; }
+  a { color:#00e; } a:visited { color:#551a8b; }
+  a:hover { background:#000; color:#fff; }
+  .mono { font-family:"Courier New",Courier,monospace; }
+  hr { border:0; border-top:4px solid #000; margin:0; }
+  img { display:block; max-width:100%; filter:grayscale(1) contrast(1.35); }
+  img:hover { filter:none; }
+
+  nav { border-bottom:4px solid #000; display:flex; flex-wrap:wrap; align-items:stretch; }
+  nav .name { font-weight:bold; padding:10px 14px; border-right:4px solid #000; font-size:20px; }
+  nav .ln { padding:10px 14px; border-right:1px solid #000; font-family:"Courier New",monospace; }
+  nav .order { margin-left:auto; padding:10px 14px; background:#ff0; color:#000; border-left:4px solid #000; font-family:"Courier New",monospace; font-weight:bold; text-transform:uppercase; }
+  nav .order:hover { background:#000; color:#ff0; }
+
+  .hero { display:grid; grid-template-columns:1fr; border-bottom:4px solid #000; }
+  .hero h1 { margin:0; font-size:clamp(48px,13vw,180px); line-height:.82; font-weight:normal; letter-spacing:-.04em; padding:24px 14px 10px; word-break:break-word; }
+  .hero .row { display:grid; grid-template-columns:1fr 2fr; border-top:1px solid #000; }
+  .hero .row > div { padding:14px; }
+  .hero .row > div + div { border-left:1px solid #000; }
+  .hero .tag { font-size:clamp(20px,2.6vw,30px); font-style:italic; margin:0 0 20px; }
+  button.cta, a.cta { font-family:"Courier New",monospace; font-size:16px; border:2px outset #ccc; background:#ddd; color:#000; padding:6px 14px; text-decoration:none; display:inline-block; cursor:pointer; }
+  a.cta:active { border-style:inset; }
+  a.cta:hover { background:#000; color:#fff; }
+  .hero img { width:100%; height:100%; max-height:560px; object-fit:cover; }
+  .hero .meta { font-size:13px; }
+
+  section { border-bottom:4px solid #000; }
+  h2 { margin:0; font-size:15px; font-family:"Courier New",monospace; text-transform:uppercase; font-weight:bold; padding:6px 14px; background:#000; color:#fff; }
+  .about { display:grid; grid-template-columns:2fr 1fr; }
+  .about p { margin:0; padding:14px; font-size:clamp(26px,3.6vw,48px); line-height:1.08; }
+  .about img { width:100%; height:100%; object-fit:cover; border-left:4px solid #000; max-height:520px; }
+
+  table { width:100%; border-collapse:collapse; }
+  th, td { border:1px solid #000; padding:8px 10px; text-align:left; vertical-align:top; }
+  th { font-family:"Courier New",monospace; font-size:13px; text-transform:uppercase; background:#eee; }
+  td.ph { width:200px; padding:0; }
+  td.ph img { width:200px; height:200px; object-fit:cover; }
+  td.n { font-size:26px; font-weight:bold; }
+  td.p { font-family:"Courier New",monospace; font-size:24px; text-align:right; white-space:nowrap; }
+
+  .reviews ol { margin:0; padding:14px 14px 14px 52px; font-size:22px; }
+  .reviews li { margin:8px 0 18px; }
+  .reviews li span { font-family:"Courier New",monospace; font-size:15px; }
+
+  .visit pre { margin:0; padding:14px; font-size:clamp(16px,2.4vw,24px); white-space:pre-wrap; }
+  footer { padding:8px 14px; font-family:"Courier New",monospace; font-size:13px; background:#ff0; }
+
+  @media (max-width:700px) {
+    nav .name { width:100%; border-right:0; border-bottom:1px solid #000; }
+    nav .order { margin-left:0; flex:1; text-align:center; border-left:0; border-top:1px solid #000; width:100%; }
+    .hero .row, .about { grid-template-columns:1fr; }
+    .hero .row > div + div { border-left:0; border-top:1px solid #000; padding:0; }
+    .about img { border-left:0; border-top:4px solid #000; }
+    thead { display:none; }
+    tr { display:grid; grid-template-columns:110px 1fr; border-bottom:4px solid #000; }
+    td { border:0; border-left:1px solid #000; }
+    td.ph { grid-row:span 3; width:110px; border-left:0; }
+    td.ph img { width:110px; height:100%; min-height:150px; }
+    td.p { text-align:left; }
+    td.n { font-size:22px; }
+  }
+  @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<nav>
+  <span class="name">Ember &amp; Oak Coffee</span>
+  <a class="ln" href="#menu">Menu</a>
+  <a class="ln" href="#about">About</a>
+  <a class="ln" href="#visit">Visit</a>
+  <a class="order" href="#menu">Order Online</a>
+</nav>
+
+<header class="hero">
+  <h1>Ember &amp; Oak Coffee</h1>
+  <div class="row">
+    <div>
+      <p class="tag">Small-batch coffee, roasted down the street.</p>
+      <a class="cta" href="#menu">See the Menu</a>
+    </div>
+    <div><img src="../../assets/photos/hero.jpg" alt="Sunlit café interior with people at tables"></div>
+  </div>
+</header>
+
+<section class="about" id="about">
+  <div>
+    <h2>About</h2>
+    <p>We started roasting in a garage in 2019. Today we roast every bean in-house and serve it the same week.</p>
+  </div>
+  <img src="../../assets/photos/about.jpg" alt="Freshly roasted coffee beans being scooped from a roaster">
+</section>
+
+<section id="menu">
+  <h2>Menu</h2>
+  <table>
+    <thead><tr><th>Photo</th><th>Item</th><th>Description</th><th>Price</th></tr></thead>
+    <tbody>
+      <tr><td class="ph"><img src="../../assets/photos/drip.jpg" alt="Coffee being poured into a white mug"></td><td class="n">House Drip</td><td>Our everyday medium roast.</td><td class="p">$3.00</td></tr>
+      <tr><td class="ph"><img src="../../assets/photos/latte.jpg" alt="Latte with leaf art on a saucer"></td><td class="n">Honey Oat Latte</td><td>Espresso, oat milk, local honey.</td><td class="p">$5.50</td></tr>
+      <tr><td class="ph"><img src="../../assets/photos/coldbrew.jpg" alt="Glass of iced cold brew"></td><td class="n">Cold Brew</td><td>Steeped 18 hours, served over ice.</td><td class="p">$4.75</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="reviews">
+  <h2>Reviews</h2>
+  <ol>
+    <li>“Best cold brew in town, and the baristas remember my order.” <span>— Sam R.</span></li>
+    <li>“The honey oat latte is worth the walk. Cozy spot to work, too.” <span>— Jordan T.</span></li>
+  </ol>
+</section>
+
+<section class="visit" id="visit">
+  <h2>Visit</h2>
+<pre class="mono">ADDRESS ..... 123 Example St, Anytown
+HOURS ....... Mon–Sat 7am–6pm
+<a href="#menu">Order Online</a></pre>
+</section>
+<footer>Demo site — fictional business</footer>
+</body>
+</html>

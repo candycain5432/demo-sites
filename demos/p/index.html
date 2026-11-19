@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember &amp; Oak Coffee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter+Tight:ital,wght@0,500;0,700;0,800;1,500&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#f3eee4; --ink:#120d0a; --red:#e2401c; --mute:#8a8074; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--ink); font-family:'Inter Tight',system-ui,sans-serif; font-weight:500; line-height:1.4; font-size:17px; overflow-x:hidden; }
+  a { color:inherit; text-decoration:none; }
+  img { display:block; }
+  .pad { padding:0 clamp(16px,3vw,40px); }
+  .anton { font-family:'Anton',Impact,'Arial Narrow',sans-serif; font-weight:400; text-transform:uppercase; line-height:.86; letter-spacing:-.005em; }
+
+  nav { display:flex; align-items:center; justify-content:space-between; gap:12px; padding-top:18px; padding-bottom:18px; font-weight:800; text-transform:uppercase; font-size:14px; letter-spacing:.04em; flex-wrap:wrap; }
+  nav .links { display:flex; gap:22px; align-items:center; }
+  nav a:hover { color:var(--red); }
+  .order { background:var(--ink); color:var(--bg); padding:10px 16px; }
+  .order:hover { background:var(--red); color:var(--bg) !important; }
+
+  .hero { padding-bottom:40px; border-bottom:3px solid var(--ink); }
+  .hero h1 { font-size:clamp(48px,14vw,240px); }
+  .hero h1 .row { display:block; white-space:nowrap; width:max-content; max-width:none; }
+  .hero h1 .row + .row { margin-top:.02em; }
+  .hero h1 .amp { color:var(--red); }
+  .hero h1 .fill { background:url(../../assets/photos/hero.jpg) center 40%/cover; -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-stroke:0; }
+  .hero .under { display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-top:24px; flex-wrap:wrap; }
+  .hero .tag { font-size:clamp(22px,3.2vw,44px); font-weight:800; letter-spacing:-.03em; line-height:1.05; max-width:16ch; }
+  .cta { display:inline-flex; align-items:center; gap:14px; font-family:'Anton',sans-serif; text-transform:uppercase; font-size:clamp(26px,3vw,40px); border-bottom:6px solid var(--red); padding-bottom:4px; transition:gap .25s, color .25s; }
+  .cta:hover { gap:26px; color:var(--red); }
+
+  section { border-bottom:3px solid var(--ink); padding-top:56px; padding-bottom:56px; }
+  .sh { font-family:'Anton',sans-serif; text-transform:uppercase; font-size:clamp(16px,1.4vw,20px); letter-spacing:.06em; color:var(--red); margin-bottom:24px; display:flex; gap:12px; align-items:center; }
+  .sh::before { content:""; width:40px; height:3px; background:var(--red); }
+
+  .about .big { font-size:clamp(34px,6.4vw,104px); font-weight:800; letter-spacing:-.045em; line-height:1.02; padding-bottom:8px; }
+  .about .big .year { color:var(--red); }
+  .about .big img { display:inline-block; height:.78em; width:1.3em; object-fit:cover; border-radius:999px; vertical-align:-.06em; margin:0 .08em; }
+
+  .menu .row { display:grid; grid-template-columns:auto 1fr auto; gap:clamp(14px,2.4vw,36px); align-items:center; padding:22px 0; border-top:1px solid rgba(18,13,10,.25); }
+  .menu .row:first-of-type { border-top:0; }
+  .menu .thumb { width:clamp(76px,9vw,130px); height:clamp(76px,9vw,130px); object-fit:cover; border-radius:50%; transition:transform .4s; }
+  .menu .row:hover .thumb { transform:rotate(-8deg) scale(1.06); }
+  .menu h3 { font-size:clamp(46px,9.4vw,150px); }
+  .menu p { font-size:clamp(16px,1.6vw,22px); font-weight:500; color:var(--mute); margin-top:8px; }
+  .menu .price { font-family:'Anton',sans-serif; font-size:clamp(34px,6vw,96px); color:var(--red); line-height:1; }
+
+  .reviews blockquote { padding:16px 0 30px; }
+  .reviews blockquote + blockquote { border-top:1px solid rgba(18,13,10,.25); padding-top:36px; text-align:right; }
+  .reviews p { font-size:clamp(30px,5vw,80px); font-weight:800; letter-spacing:-.045em; line-height:1; }
+  .reviews blockquote:nth-child(3) p { font-style:italic; font-weight:500; }
+  .reviews cite { display:inline-block; margin-top:16px; font-style:normal; font-weight:800; text-transform:uppercase; letter-spacing:.08em; background:var(--ink); color:var(--bg); padding:4px 10px; }
+
+  .visit { background:var(--ink); color:var(--bg); border-bottom:0; }
+  .visit .sh { color:var(--red); }
+  .visit .addr { font-size:clamp(46px,9vw,150px); }
+  .visit .hrs { font-size:clamp(28px,4.6vw,72px); color:var(--red); margin-top:12px; }
+  .visit .order { display:inline-block; margin-top:40px; background:var(--red); color:var(--bg); font-family:'Anton',sans-serif; text-transform:uppercase; font-size:clamp(24px,3vw,40px); padding:14px 26px; }
+  .visit .order:hover { background:var(--bg); color:var(--ink) !important; }
+  footer { background:var(--ink); color:var(--mute); padding-top:12px; padding-bottom:28px; font-size:13px; text-transform:uppercase; letter-spacing:.08em; }
+
+  @media (max-width:640px) {
+    nav .links { width:100%; justify-content:space-between; gap:12px; }
+    .menu .row { grid-template-columns:auto 1fr; }
+    .menu .price { grid-column:2; }
+    .menu .thumb { align-self:start; margin-top:6px; }
+    .about .big img { width:1.1em; }
+  }
+  @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } * { transition:none !important; } .menu .row:hover .thumb { transform:none; } }
+</style>
+</head>
+<body>
+<nav class="pad">
+  <a href="#">Ember &amp; Oak Coffee</a>
+  <div class="links">
+    <a href="#menu">Menu</a>
+    <a href="#about">About</a>
+    <a href="#visit">Visit</a>
+    <a class="order" href="#menu">Order Online</a>
+  </div>
+</nav>
+
+<header class="hero pad">
+  <h1 class="anton" aria-label="Ember &amp; Oak Coffee"><span class="row" aria-hidden="true">Ember <span class="amp">&amp;</span> Oak</span> <span class="row fill" role="img" aria-label="Sunlit café interior seen through the letters">Coffee</span></h1>
+  <div class="under">
+    <p class="tag">Small-batch coffee, roasted down the street.</p>
+    <a class="cta" href="#menu">See the Menu <span aria-hidden="true">→</span></a>
+  </div>
+</header>
+
+<section class="about pad" id="about">
+  <h2 class="sh">About</h2>
+  <p class="big">We started roasting in a garage in <span class="year">2019</span>. Today we roast every bean <img src="../../assets/photos/about.jpg" alt="Freshly roasted coffee beans being scooped from a roaster"> in-house and serve it the same week.</p>
+</section>
+
+<section class="menu pad" id="menu">
+  <h2 class="sh">Menu</h2>
+  <div class="row"><img class="thumb" src="../../assets/photos/drip.jpg" alt="Coffee being poured into a white mug"><div><h3 class="anton">House Drip</h3><p>Our everyday medium roast.</p></div><span class="price">$3.00</span></div>
+  <div class="row"><img class="thumb" src="../../assets/photos/latte.jpg" alt="Latte with leaf art on a saucer"><div><h3 class="anton">Honey Oat Latte</h3><p>Espresso, oat milk, local honey.</p></div><span class="price">$5.50</span></div>
+  <div class="row"><img class="thumb" src="../../assets/photos/coldbrew.jpg" alt="Glass of iced cold brew"><div><h3 class="anton">Cold Brew</h3><p>Steeped 18 hours, served over ice.</p></div><span class="price">$4.75</span></div>
+</section>
+
+<section class="reviews pad">
+  <h2 class="sh">Reviews</h2>
+  <blockquote><p>“Best cold brew in town, and the baristas remember my order.”</p><cite>Sam R.</cite></blockquote>
+  <blockquote><p>“The honey oat latte is worth the walk. Cozy spot to work, too.”</p><cite>Jordan T.</cite></blockquote>
+</section>
+
+<section class="visit pad" id="visit">
+  <h2 class="sh">Visit</h2>
+  <div class="addr anton">123 Example St, Anytown</div>
+  <div class="hrs anton">Mon–Sat 7am–6pm</div>
+  <a class="order" href="#menu">Order Online</a>
+</section>
+<footer class="pad">Demo site — fictional business</footer>
+<script>
+  (function () {
+    var rows = document.querySelectorAll('.hero h1 .row');
+    function fit() {
+      var w = document.querySelector('.hero h1').clientWidth;
+      rows.forEach(function (r) { r.style.fontSize = '100px'; r.style.fontSize = (100 * w / r.scrollWidth * 0.99) + 'px'; });
+    }
+    fit(); window.addEventListener('resize', fit);
+    if (document.fonts) document.fonts.ready.then(fit);
+  })();
+</script>
+</body>
+</html>
