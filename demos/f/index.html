@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember &amp; Oak Coffee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..700,100&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --sand:#f4ede1; --clay:#e7d7c1; --moss:#5f6f45; --olive:#8a9a5b; --terra:#c06a45; --bark:#4a3527; --soft:#7b6a5c; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Karla',system-ui,sans-serif; background:var(--sand); color:var(--bark); line-height:1.65; font-size:17px; overflow-x:hidden; }
+  a { color:inherit; text-decoration:none; }
+  img { display:block; width:100%; height:100%; object-fit:cover; }
+  h1,h2,h3 { font-family:'Fraunces',Georgia,serif; font-variation-settings:"SOFT" 100; font-weight:600; }
+  .wrap { max-width:1120px; margin:0 auto; padding:0 24px; position:relative; }
+  .btn { display:inline-block; background:var(--moss); color:var(--sand); padding:14px 30px; border-radius:60px 50px 64px 44px / 50px 60px 44px 60px; font-weight:700; transition:background .3s, border-radius .5s; }
+  .btn:hover { background:var(--terra); border-radius:44px 64px 50px 60px / 60px 44px 60px 50px; }
+  .blob1 { border-radius:62% 38% 46% 54% / 55% 44% 56% 45%; }
+  .blob2 { border-radius:42% 58% 63% 37% / 41% 52% 48% 59%; }
+  .blob3 { border-radius:55% 45% 35% 65% / 60% 40% 60% 40%; }
+  .blob4 { border-radius:38% 62% 56% 44% / 48% 38% 62% 52%; }
+  .morph { animation:morph 14s ease-in-out infinite alternate; }
+  @keyframes morph { 0% { border-radius:62% 38% 46% 54% / 55% 44% 56% 45%; } 50% { border-radius:45% 55% 60% 40% / 45% 58% 42% 55%; } 100% { border-radius:55% 45% 38% 62% / 60% 40% 58% 42%; } }
+  .leaf { position:absolute; pointer-events:none; color:var(--olive); }
+  .warm img { filter:saturate(.85) sepia(.12); }
+
+  nav .wrap { display:flex; align-items:center; justify-content:space-between; padding-top:22px; padding-bottom:22px; gap:14px; flex-wrap:wrap; }
+  .logo { display:flex; align-items:center; gap:10px; font-family:'Fraunces',serif; font-variation-settings:"SOFT" 100; font-weight:600; font-size:21px; }
+  .logo svg { width:30px; height:30px; }
+  .links { display:flex; align-items:center; gap:28px; }
+  .links a.l { position:relative; }
+  .links a.l::after { content:""; position:absolute; left:0; right:0; bottom:-4px; height:6px; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 6'%3E%3Cpath d='M0 3 Q5 0 10 3 T20 3 T30 3 T40 3' fill='none' stroke='%23c06a45' stroke-width='1.5'/%3E%3C/svg%3E") repeat-x; background-size:20px 6px; opacity:0; transition:opacity .3s; }
+  .links a.l:hover::after { opacity:1; }
+  .links .btn { padding:10px 20px; }
+
+  .hero { padding:40px 0 100px; position:relative; }
+  .hero .grid { display:grid; grid-template-columns:1fr 1.1fr; gap:40px; align-items:center; }
+  .hero h1 { font-size:clamp(46px,6.6vw,86px); line-height:1; letter-spacing:-.02em; color:var(--bark); }
+  .hero h1 em { font-style:italic; color:var(--terra); font-weight:500; }
+  .hero p { font-size:21px; color:var(--soft); margin:22px 0 34px; max-width:420px; }
+  .hero .pic-wrap { position:relative; }
+  .hero .pic-wrap::before { content:""; position:absolute; inset:-22px -10px -14px -30px; background:var(--clay); border-radius:45% 55% 60% 40% / 50% 45% 55% 50%; z-index:0; }
+  .hero .pic { position:relative; z-index:1; aspect-ratio:1/1; overflow:hidden; }
+  .hero .l1 { width:150px; right:-30px; top:-40px; transform:rotate(25deg); z-index:2; }
+  .hero .l2 { width:110px; left:-50px; bottom:-30px; transform:rotate(-140deg); z-index:2; color:var(--moss); }
+
+  .wave { display:block; width:100%; height:80px; }
+  .about { background:var(--clay); position:relative; }
+  .about .grid { display:grid; grid-template-columns:.9fr 1.1fr; gap:64px; align-items:center; padding:40px 24px 60px; }
+  .about .pic { aspect-ratio:4/5; overflow:hidden; }
+  .about h2, .menu h2, .reviews h2, .visit h2 { font-size:clamp(38px,5vw,60px); line-height:1; color:var(--moss); }
+  .about p { font-size:clamp(21px,2.3vw,27px); line-height:1.5; margin-top:22px; font-family:'Fraunces',serif; font-variation-settings:"SOFT" 100; font-weight:400; }
+  .about .l3 { width:120px; right:4%; top:-30px; transform:rotate(200deg); }
+
+  section, .hero { position:relative; overflow-x:clip; }
+  .menu { padding:100px 0 80px; text-align:center; }
+  .items { display:grid; grid-template-columns:repeat(3,1fr); gap:48px; margin-top:56px; }
+  .item .pic { aspect-ratio:1/1; overflow:hidden; margin:0 auto 24px; max-width:300px; transition:transform .6s; }
+  .item:hover .pic { transform:rotate(-3deg) scale(1.03); }
+  .item h3 { font-size:26px; }
+  .item p { color:var(--soft); margin:4px 0 12px; }
+  .price { display:inline-block; background:var(--olive); color:var(--sand); font-weight:700; padding:6px 18px; border-radius:30px 24px 28px 20px; }
+  .item:nth-child(2) .price { background:var(--terra); }
+  .item:nth-child(3) .price { background:var(--moss); }
+  .menu .l4 { width:90px; left:2%; top:40px; transform:rotate(-30deg); }
+
+  .reviews { background:var(--moss); color:var(--sand); }
+  .reviews .inner { padding:40px 24px 70px; }
+  .reviews h2 { color:var(--clay); text-align:center; }
+  .reviews .grid { display:grid; grid-template-columns:1fr 1fr; gap:36px; margin-top:44px; }
+  .rv { background:rgba(244,237,225,.1); padding:36px 40px; border-radius:60px 30px 60px 30px; }
+  .rv:nth-child(2) { border-radius:30px 60px 30px 60px; }
+  .rv p { font-family:'Fraunces',serif; font-variation-settings:"SOFT" 100; font-size:clamp(20px,2.2vw,25px); line-height:1.4; font-style:italic; }
+  .rv cite { display:block; margin-top:18px; font-style:normal; font-weight:700; color:#e3c9a8; }
+
+  .visit { padding:90px 0 40px; text-align:center; }
+  .visit .card { position:relative; display:inline-block; background:var(--clay); padding:56px 72px; margin-top:36px; }
+  .visit .card p { font-size:21px; }
+  .visit .card .hrs { color:var(--soft); margin:4px 0 26px; }
+  .visit .l5 { width:110px; left:-40px; top:-30px; transform:rotate(-60deg); }
+  footer { text-align:center; padding:40px 0 48px; color:var(--soft); font-size:14px; }
+
+  @media (max-width:860px) {
+    .hero .grid, .about .grid, .reviews .grid { grid-template-columns:1fr; }
+    .hero .pic-wrap { max-width:440px; margin:20px auto 0; width:90%; }
+    .about .pic { max-width:380px; margin:0 auto; width:85%; }
+    .items { grid-template-columns:1fr; gap:56px; }
+  }
+  @media (max-width:600px) {
+    .links { width:100%; justify-content:space-between; gap:12px; }
+    .hero { padding:20px 0 70px; }
+    .hero .l1 { width:100px; right:-14px; } .hero .l2 { width:80px; left:-20px; }
+    .about .grid { gap:36px; }
+    .rv { padding:28px; }
+    .visit .card { padding:40px 28px; display:block; }
+    .visit .l5 { left:-10px; width:80px; }
+    .menu { padding:70px 0 60px; }
+  }
+  @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .morph { animation:none; } * { transition:none !important; } .item:hover .pic { transform:none; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="leaf" viewBox="0 0 120 60"><path d="M4 30 C30 2, 80 0, 116 30 C80 60, 30 58, 4 30 Z" fill="currentColor" opacity=".9"/><path d="M4 30 C40 28, 80 28, 116 30" stroke="#f4ede1" stroke-width="1.6" fill="none" opacity=".7"/><path d="M30 29 L44 18 M50 29 L64 16 M70 29 L84 18 M40 31 L54 42 M60 31 L74 44 M80 31 L92 41" stroke="#f4ede1" stroke-width="1.1" opacity=".55"/></symbol>
+  <symbol id="sprig" viewBox="0 0 100 120"><path d="M50 118 C48 80, 52 40, 50 4" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/><g fill="currentColor"><ellipse cx="36" cy="30" rx="14" ry="7" transform="rotate(-35 36 30)"/><ellipse cx="64" cy="44" rx="14" ry="7" transform="rotate(35 64 44)"/><ellipse cx="36" cy="62" rx="15" ry="7.5" transform="rotate(-35 36 62)"/><ellipse cx="64" cy="78" rx="15" ry="7.5" transform="rotate(35 64 78)"/><ellipse cx="50" cy="10" rx="6" ry="10"/></g></symbol>
+</svg>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#"><svg viewBox="0 0 30 30" aria-hidden="true"><ellipse cx="15" cy="15" rx="9" ry="13" transform="rotate(25 15 15)" fill="#c06a45"/><path d="M10 5 C17 10, 13 20, 20 25" stroke="#f4ede1" stroke-width="1.6" fill="none"/></svg>Ember &amp; Oak Coffee</a>
+    <div class="links">
+      <a class="l" href="#menu">Menu</a>
+      <a class="l" href="#about">About</a>
+      <a class="l" href="#visit">Visit</a>
+      <a class="btn" href="#menu">Order Online</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap grid">
+    <div>
+      <h1>Ember <em>&amp;</em> Oak Coffee</h1>
+      <p>Small-batch coffee, roasted down the street.</p>
+      <a class="btn" href="#menu">See the Menu</a>
+    </div>
+    <div class="pic-wrap">
+      <svg class="leaf l1" viewBox="0 0 120 60" aria-hidden="true"><use href="#leaf"/></svg>
+      <div class="pic blob1 morph warm"><img src="../../assets/photos/hero.jpg" alt="Sunlit café interior with people at tables"></div>
+      <svg class="leaf l2" viewBox="0 0 120 60" aria-hidden="true"><use href="#leaf"/></svg>
+    </div>
+  </div>
+</header>
+
+<svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 50 C240 0 480 90 720 45 C960 0 1200 80 1440 30 L1440 80 L0 80 Z" fill="#e7d7c1"/></svg>
+<section class="about" id="about">
+  <svg class="leaf l3" viewBox="0 0 100 120" aria-hidden="true"><use href="#sprig"/></svg>
+  <div class="wrap grid">
+    <div class="pic blob2 warm"><img src="../../assets/photos/about.jpg" alt="Freshly roasted coffee beans being scooped from a roaster"></div>
+    <div>
+      <h2>About</h2>
+      <p>We started roasting in a garage in 2019. Today we roast every bean in-house and serve it the same week.</p>
+    </div>
+  </div>
+</section>
+<svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 L1440 0 L1440 40 C1180 90 940 10 700 45 C460 80 220 10 0 40 Z" fill="#e7d7c1"/></svg>
+
+<section class="menu" id="menu">
+  <svg class="leaf l4" viewBox="0 0 100 120" aria-hidden="true"><use href="#sprig"/></svg>
+  <div class="wrap">
+    <h2>Menu</h2>
+    <div class="items">
+      <article class="item"><div class="pic blob3 warm"><img src="../../assets/photos/drip.jpg" alt="Coffee being poured into a white mug"></div><h3>House Drip</h3><p>Our everyday medium roast.</p><span class="price">$3.00</span></article>
+      <article class="item"><div class="pic blob1 warm"><img src="../../assets/photos/latte.jpg" alt="Latte with leaf art on a saucer"></div><h3>Honey Oat Latte</h3><p>Espresso, oat milk, local honey.</p><span class="price">$5.50</span></article>
+      <article class="item"><div class="pic blob4 warm"><img src="../../assets/photos/coldbrew.jpg" alt="Glass of iced cold brew"></div><h3>Cold Brew</h3><p>Steeped 18 hours, served over ice.</p><span class="price">$4.75</span></article>
+    </div>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 C300 90 520 0 760 40 C1000 80 1220 10 1440 50 L1440 80 L0 80 Z" fill="#5f6f45"/></svg>
+<section class="reviews">
+  <div class="wrap inner">
+    <h2>Reviews</h2>
+    <div class="grid">
+      <blockquote class="rv"><p>“Best cold brew in town, and the baristas remember my order.”</p><cite>Sam R.</cite></blockquote>
+      <blockquote class="rv"><p>“The honey oat latte is worth the walk. Cozy spot to work, too.”</p><cite>Jordan T.</cite></blockquote>
+    </div>
+  </div>
+</section>
+<svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 L1440 0 L1440 30 C1200 80 980 10 720 40 C460 70 240 0 0 50 Z" fill="#5f6f45"/></svg>
+
+<section class="visit" id="visit">
+  <div class="wrap">
+    <h2>Visit</h2>
+    <div class="card blob4">
+      <svg class="leaf l5" viewBox="0 0 120 60" aria-hidden="true"><use href="#leaf"/></svg>
+      <p>123 Example St, Anytown</p>
+      <p class="hrs">Mon–Sat 7am–6pm</p>
+      <a class="btn" href="#menu">Order Online</a>
+    </div>
+  </div>
+</section>
+<footer>Demo site — fictional business</footer>
+</body>
+</html>
