@@ -88,10 +88,12 @@
     .hero-photo { margin:12px 12px 0 0; }
   }
   @media (max-width:600px) {
-    .links a.l { display:none; }
+    nav .wrap { flex-wrap:wrap; height:auto; padding-top:10px; padding-bottom:10px; row-gap:8px; }
+    .links { width:100%; justify-content:space-between; gap:10px; }
+    .links a.l { padding:6px 8px; }
     .logo { font-size:15px; padding:5px 8px; }
     .links .btn { font-size:12px; padding:8px 10px; white-space:nowrap; }
-    nav .wrap { height:66px; }
+    
     section { padding:64px 0; }
     .sec-title { margin-bottom:36px; }
     .sticker { width:88px; height:88px; left:-8px; } .sticker svg { width:46px; height:46px; }
