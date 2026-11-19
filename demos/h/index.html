@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember &amp; Oak Coffee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --glass:rgba(255,255,255,.14); --glass2:rgba(255,255,255,.22); --edge:rgba(255,255,255,.35); --txt:#fff; --soft:rgba(255,255,255,.78); }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Outfit',system-ui,sans-serif; color:var(--txt); line-height:1.6; font-size:17px; min-height:100vh; overflow-x:hidden;
+    background:#1b1030 linear-gradient(170deg,#2a1450 0%,#4b1d5e 25%,#7a2f58 50%,#3a1c5e 72%,#b85a3a 100%); position:relative; }
+  a { color:inherit; text-decoration:none; }
+  img { display:block; width:100%; }
+  .blobs { position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .blob { position:absolute; border-radius:50%; filter:blur(60px); opacity:.75; animation:float 18s ease-in-out infinite alternate; }
+  .blob { width:max(40vw,320px); height:max(40vw,320px); }
+  .b1 { background:#ff7a59; left:-12vw; top:2%; }
+  .b2 { background:#7b5cff; right:-14vw; top:18%; animation-duration:22s; }
+  .b3 { background:#ffcf5c; left:-10vw; top:36%; animation-duration:26s; opacity:.6; }
+  .b4 { background:#29d3c5; right:-8vw; top:52%; opacity:.55; animation-duration:20s; }
+  .b5 { background:#ff5fa2; left:20vw; top:68%; animation-duration:24s; }
+  .b6 { background:#7b5cff; right:-10vw; top:84%; animation-duration:19s; }
+  @keyframes float { 0% { transform:translate(0,0) scale(1); } 100% { transform:translate(6vw,-5vh) scale(1.12); } }
+  main, nav, footer { position:relative; z-index:1; }
+  .wrap { max-width:1140px; margin:0 auto; padding:0 20px; }
+  .glass { background:var(--glass); border:1px solid var(--edge); border-radius:26px; backdrop-filter:blur(22px) saturate(160%); -webkit-backdrop-filter:blur(22px) saturate(160%); box-shadow:0 10px 40px rgba(20,5,40,.25), inset 0 1px 0 rgba(255,255,255,.4); }
+  .btn { display:inline-flex; align-items:center; gap:10px; font-weight:600; padding:13px 26px; border-radius:999px; background:rgba(255,255,255,.9); color:#3a1840; transition:transform .25s, box-shadow .25s, background .25s; box-shadow:0 8px 24px rgba(20,5,40,.25); }
+  .btn:hover { transform:translateY(-2px); box-shadow:0 14px 30px rgba(20,5,40,.35); }
+  .btn.ghost { background:var(--glass2); color:#fff; border:1px solid var(--edge); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); box-shadow:none; }
+
+  nav { position:sticky; top:14px; z-index:20; padding:0 20px; }
+  nav .bar { max-width:1140px; margin:14px auto 0; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 10px 10px 22px; border-radius:999px; flex-wrap:wrap; }
+  .logo { font-weight:600; font-size:18px; letter-spacing:.01em; }
+  .links { display:flex; align-items:center; gap:6px; }
+  .links a.l { padding:8px 14px; border-radius:999px; color:var(--soft); transition:background .2s, color .2s; }
+  .links a.l:hover { background:rgba(255,255,255,.18); color:#fff; }
+  .links .btn { padding:9px 18px; font-size:15px; }
+
+  .hero { position:relative; margin:28px auto 0; max-width:1180px; padding:0 20px; }
+  .hero .photo { border-radius:34px; overflow:hidden; height:min(78vh,680px); min-height:480px; position:relative; }
+  .hero .photo img { height:100%; object-fit:cover; }
+  .hero .photo::after { content:""; position:absolute; inset:0; background:linear-gradient(120deg,rgba(60,20,90,.45),rgba(255,120,80,.15)); }
+  .hero .card { position:absolute; left:64px; bottom:56px; max-width:520px; padding:40px; }
+  .hero h1 { font-size:clamp(40px,5.6vw,68px); line-height:1.02; font-weight:600; letter-spacing:-.025em; }
+  .hero p { color:var(--soft); font-size:20px; margin:14px 0 28px; font-weight:300; }
+
+  section { padding:72px 0; }
+  .sec-h { display:inline-block; padding:8px 22px; font-size:15px; font-weight:500; letter-spacing:.16em; text-transform:uppercase; margin-bottom:28px; border-radius:999px; }
+
+  .about .grid { display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:stretch; }
+  .about .txt { padding:44px; display:flex; flex-direction:column; justify-content:center; }
+  .about .txt p { font-size:clamp(22px,2.4vw,30px); font-weight:300; line-height:1.4; }
+  .about .pic { padding:12px; }
+  .about .pic img { border-radius:18px; height:100%; min-height:320px; max-height:460px; object-fit:cover; }
+
+  .items { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .item { padding:12px; transition:transform .3s, background .3s; }
+  .item:hover { transform:translateY(-6px); background:var(--glass2); }
+  .item .im { position:relative; border-radius:18px; overflow:hidden; }
+  .item img { aspect-ratio:1/1; object-fit:cover; }
+  .item .price { position:absolute; right:12px; top:12px; padding:6px 14px; border-radius:999px; font-weight:600; background:rgba(40,15,60,.4); border:1px solid var(--edge); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); }
+  .item .b { padding:16px 10px 8px; }
+  .item h3 { font-size:21px; font-weight:600; }
+  .item p { color:var(--soft); font-weight:300; }
+
+  .reviews .grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .rv { padding:32px; }
+  .rv p { font-size:20px; font-weight:300; }
+  .rv .who { display:flex; align-items:center; gap:12px; margin-top:20px; font-weight:500; }
+  .rv .who i { width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#ff7a59,#7b5cff); display:grid; place-items:center; font-style:normal; font-weight:600; border:1px solid var(--edge); }
+  .rv:nth-child(2) .who i { background:linear-gradient(135deg,#29d3c5,#ffcf5c); }
+
+  .visit .card { display:grid; grid-template-columns:1fr 1fr auto; gap:24px; align-items:center; padding:32px 36px; }
+  .visit .k { font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--soft); }
+  .visit .v { font-size:20px; font-weight:500; }
+  footer { text-align:center; padding:8px 0 40px; color:var(--soft); font-size:14px; }
+
+  @media (max-width:860px) {
+    .about .grid, .reviews .grid, .visit .card { grid-template-columns:1fr; }
+    .items { grid-template-columns:1fr; max-width:440px; margin:0 auto; }
+    .hero .card { left:20px; right:20px; bottom:20px; padding:28px; }
+  }
+  @media (max-width:600px) {
+    nav { top:8px; padding:0 12px; }
+    nav .bar { border-radius:24px; padding:10px 12px; row-gap:6px; }
+    .logo { padding-left:6px; }
+    .links { width:100%; justify-content:space-between; }
+    .links a.l { padding:8px 10px; }
+    .hero { padding:0 12px; margin-top:16px; }
+    .hero .photo { min-height:560px; border-radius:26px; }
+    .hero .card { left:12px; right:12px; bottom:12px; padding:24px; }
+    .hero p { font-size:18px; }
+    section { padding:52px 0; }
+    .about .txt { padding:28px; }
+    .blob { filter:blur(40px); }
+  }
+  @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .blob { animation:none; } * { transition:none !important; } }
+</style>
+</head>
+<body>
+<div class="blobs" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="blob b4"></span><span class="blob b5"></span><span class="blob b6"></span></div>
+<nav>
+  <div class="bar glass">
+    <a class="logo" href="#">Ember &amp; Oak Coffee</a>
+    <div class="links">
+      <a class="l" href="#menu">Menu</a>
+      <a class="l" href="#about">About</a>
+      <a class="l" href="#visit">Visit</a>
+      <a class="btn" href="#menu">Order Online</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <header class="hero">
+    <div class="photo"><img src="../../assets/photos/hero.jpg" alt="Sunlit café interior with people at tables"></div>
+    <div class="card glass">
+      <h1>Ember &amp; Oak Coffee</h1>
+      <p>Small-batch coffee, roasted down the street.</p>
+      <a class="btn" href="#menu">See the Menu →</a>
+    </div>
+  </header>
+
+  <section class="about" id="about">
+    <div class="wrap">
+      <h2 class="sec-h glass">About</h2>
+      <div class="grid">
+        <div class="txt glass"><p>We started roasting in a garage in 2019. Today we roast every bean in-house and serve it the same week.</p></div>
+        <div class="pic glass"><img src="../../assets/photos/about.jpg" alt="Freshly roasted coffee beans being scooped from a roaster"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu">
+    <div class="wrap">
+      <h2 class="sec-h glass">Menu</h2>
+      <div class="items">
+        <article class="item glass"><div class="im"><img src="../../assets/photos/drip.jpg" alt="Coffee being poured into a white mug"><span class="price">$3.00</span></div><div class="b"><h3>House Drip</h3><p>Our everyday medium roast.</p></div></article>
+        <article class="item glass"><div class="im"><img src="../../assets/photos/latte.jpg" alt="Latte with leaf art on a saucer"><span class="price">$5.50</span></div><div class="b"><h3>Honey Oat Latte</h3><p>Espresso, oat milk, local honey.</p></div></article>
+        <article class="item glass"><div class="im"><img src="../../assets/photos/coldbrew.jpg" alt="Glass of iced cold brew"><span class="price">$4.75</span></div><div class="b"><h3>Cold Brew</h3><p>Steeped 18 hours, served over ice.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews">
+    <div class="wrap">
+      <h2 class="sec-h glass">Reviews</h2>
+      <div class="grid">
+        <figure class="rv glass"><p>“Best cold brew in town, and the baristas remember my order.”</p><figcaption class="who"><i aria-hidden="true">S</i>Sam R.</figcaption></figure>
+        <figure class="rv glass"><p>“The honey oat latte is worth the walk. Cozy spot to work, too.”</p><figcaption class="who"><i aria-hidden="true">J</i>Jordan T.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="visit" id="visit">
+    <div class="wrap">
+      <h2 class="sec-h glass">Visit</h2>
+      <div class="card glass">
+        <div><div class="v">123 Example St, Anytown</div></div>
+        <div><div class="v">Mon–Sat 7am–6pm</div></div>
+        <a class="btn" href="#menu">Order Online</a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>Demo site — fictional business</footer>
+</body>
+</html>
