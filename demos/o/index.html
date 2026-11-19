@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember &amp; Oak Coffee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#111; --soft:#6e6e73; --bg:#fff; --line:#ececec; --accent:#9a5b2e; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Inter',system-ui,sans-serif; color:var(--ink); background:var(--bg); font-weight:400; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; }
+  img { display:block; width:100%; }
+  .wrap { max-width:1080px; margin:0 auto; padding:0 24px; }
+
+  nav { position:sticky; top:0; z-index:10; background:rgba(255,255,255,.88); backdrop-filter:saturate(180%) blur(12px); -webkit-backdrop-filter:saturate(180%) blur(12px); border-bottom:1px solid var(--line); }
+  nav .wrap { display:flex; align-items:center; justify-content:space-between; height:56px; }
+  .logo { font-weight:600; font-size:15px; letter-spacing:-.01em; }
+  .links { display:flex; gap:32px; align-items:center; font-size:13px; color:var(--soft); }
+  .links a:hover { color:var(--ink); }
+  .btn { display:inline-block; font-size:13px; font-weight:500; color:#fff; background:var(--ink); padding:8px 16px; border-radius:999px; transition:opacity .2s; }
+  .btn:hover { opacity:.8; }
+  .links .btn { color:#fff; }
+
+  .hero { text-align:center; padding:140px 0 72px; }
+  .hero h1 { font-size:clamp(40px,7vw,80px); font-weight:600; letter-spacing:-.035em; line-height:1.05; }
+  .hero p { font-size:clamp(18px,2.2vw,22px); color:var(--soft); font-weight:300; margin:20px auto 40px; max-width:520px; }
+  .btn-lg { font-size:16px; padding:12px 24px; background:var(--accent); }
+  .hero-img { margin-top:96px; aspect-ratio:16/8; object-fit:cover; border-radius:4px; }
+
+  section { padding:140px 0; }
+  .label { font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--soft); margin-bottom:24px; }
+  .about { display:grid; grid-template-columns:1fr 1fr; gap:96px; align-items:center; }
+  .about p { font-size:clamp(22px,2.6vw,30px); font-weight:300; line-height:1.4; letter-spacing:-.015em; }
+  .about img { aspect-ratio:4/5; object-fit:cover; border-radius:4px; }
+
+  .menu-head { text-align:center; margin-bottom:80px; }
+  .menu-head h2, .reviews h2, .visit h2 { font-size:clamp(32px,4.5vw,48px); font-weight:600; letter-spacing:-.03em; }
+  .items { display:grid; grid-template-columns:repeat(3,1fr); gap:48px; }
+  .item img { aspect-ratio:4/5; object-fit:cover; border-radius:4px; margin-bottom:24px; background:#f5f5f7; }
+  .item h3 { font-size:18px; font-weight:500; letter-spacing:-.01em; }
+  .item p { color:var(--soft); font-size:15px; margin:4px 0 10px; }
+  .item .price { font-size:15px; }
+
+  .reviews { border-top:1px solid var(--line); text-align:center; }
+  .quotes { display:grid; grid-template-columns:1fr 1fr; gap:80px; margin-top:80px; text-align:left; }
+  blockquote p { font-size:clamp(20px,2.2vw,24px); font-weight:300; line-height:1.45; letter-spacing:-.01em; }
+  blockquote cite { display:block; margin-top:20px; font-style:normal; font-size:14px; color:var(--soft); }
+
+  .visit { border-top:1px solid var(--line); text-align:center; padding-bottom:80px; }
+  .visit .info { margin:32px 0 48px; color:var(--soft); font-size:18px; font-weight:300; }
+  .visit .info span { display:block; }
+  footer { padding:32px 0 48px; border-top:1px solid var(--line); text-align:center; font-size:12px; color:#a1a1a6; }
+
+  @media (max-width:760px) {
+    .links a:not(.btn) { display:none; }
+    .links { gap:0; }
+    .hero { padding:96px 0 48px; }
+    .hero-img { margin-top:64px; aspect-ratio:4/3; }
+    section { padding:96px 0; }
+    .about, .quotes { grid-template-columns:1fr; gap:48px; }
+    .items { grid-template-columns:1fr; gap:64px; }
+    .menu-head { margin-bottom:56px; }
+    .quotes { margin-top:48px; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    html { scroll-behavior:auto; }
+    * { transition:none !important; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#">Ember &amp; Oak Coffee</a>
+    <div class="links">
+      <a href="#menu">Menu</a>
+      <a href="#about">About</a>
+      <a href="#visit">Visit</a>
+      <a class="btn" href="#menu">Order Online</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Ember &amp; Oak Coffee</h1>
+    <p>Small-batch coffee, roasted down the street.</p>
+    <a class="btn btn-lg" href="#menu">See the Menu</a>
+    <img class="hero-img" src="../../assets/photos/hero.jpg" alt="Sunlit café interior with people at tables">
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap about">
+    <div>
+      <div class="label">About</div>
+      <p>We started roasting in a garage in 2019. Today we roast every bean in-house and serve it the same week.</p>
+    </div>
+    <img src="../../assets/photos/about.jpg" alt="Freshly roasted coffee beans being scooped from a roaster">
+  </div>
+</section>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="menu-head">
+      <h2>Menu</h2>
+    </div>
+    <div class="items">
+      <article class="item">
+        <img src="../../assets/photos/drip.jpg" alt="Coffee being poured into a white mug">
+        <h3>House Drip</h3>
+        <p>Our everyday medium roast.</p>
+        <div class="price">$3.00</div>
+      </article>
+      <article class="item">
+        <img src="../../assets/photos/latte.jpg" alt="Latte with leaf art on a saucer">
+        <h3>Honey Oat Latte</h3>
+        <p>Espresso, oat milk, local honey.</p>
+        <div class="price">$5.50</div>
+      </article>
+      <article class="item">
+        <img src="../../assets/photos/coldbrew.jpg" alt="Glass of iced cold brew">
+        <h3>Cold Brew</h3>
+        <p>Steeped 18 hours, served over ice.</p>
+        <div class="price">$4.75</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="wrap">
+    <h2>Reviews</h2>
+    <div class="quotes">
+      <blockquote><p>“Best cold brew in town, and the baristas remember my order.”</p><cite>Sam R.</cite></blockquote>
+      <blockquote><p>“The honey oat latte is worth the walk. Cozy spot to work, too.”</p><cite>Jordan T.</cite></blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="wrap">
+    <h2>Visit</h2>
+    <p class="info"><span>123 Example St, Anytown</span><span>Mon–Sat 7am–6pm</span></p>
+    <a class="btn" href="#menu">Order Online</a>
+  </div>
+</section>
+<footer>Demo site — fictional business</footer>
+</body>
+</html>
